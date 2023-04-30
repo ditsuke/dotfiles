@@ -10,7 +10,8 @@ depends = []
 "powershell" = "~/.powershell"
 "zsh/rc" = "~/.zshrc"
 "zsh/env" = "~/.zshenv"
-"nvim" = "~/.config/nvim"
+# "nvim" = "~/.config/nvim"
+"nvim-config" = "~/.config/nvim"
 # "astronvim" = "~/.config/astronvim"
 "tmux.conf" = "~/.tmux.conf"
 "gitui" = "~/.config/gitui"
@@ -34,3 +35,9 @@ depends = []
 
 [fedora-gnome.files]
 "dconf/settings.ini" = "~/.config/dconf/settings.ini"
+
+[pop-shell]
+depends = []
+
+[pop-shekll.files]
+"pop-shell" = "~/.config/pop-shell"
