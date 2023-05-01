@@ -22,6 +22,7 @@ depends = []
 "github-cli/config.yml" = "~/.config/gh/config.yaml"
 "glow" = "~/.config/glow"
 "kitty" = { target = "~/.config/kitty", type = "symbolic" }
+"alacritty" = { target = "~/.config/alacritty", type = "symbolic" }
 "ipython/ipython_config.py" = "~/.ipython/profile_default/ipython_config.py"
 
 [default.variables]
