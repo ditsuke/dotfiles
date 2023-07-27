@@ -8,6 +8,7 @@
 	autocrlf = input
 	eol = lf
 	pager = less
+	excludesfile = ~/.gitignore_global
 [credential]
 	helper = manager-core
 [credential "https://dev.azure.com"]
@@ -30,4 +31,3 @@
 	external = difft
 [init]
 	defaultBranch = main
-
