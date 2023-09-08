@@ -119,8 +119,8 @@ source $ZSH/oh-my-zsh.sh
 ## Aliases
 alias vim="nvim +NoSession"
 alias cat="bat"
-alias ls="exa"
-alias l="exa --long --all --header"
+alias ls="eza"
+alias l="eza --long --all --header"
 alias dust="dust --reverse"
 alias fzf="fzf --layout=reverse --height='30%'"
 alias fzfp="fzf --preview='bat {}'"

@@ -17,17 +17,23 @@ HOMEBREW_DIR=/home/linuxbrew/.linuxbrew
 PATH="$PATH:${HOMEBREW_DIR}/bin:${HOMEBREW_DIR}/sbin"
 #eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-### Cargo
-. "$HOME/.cargo/env"
+### Cargo (if exist)
+if command -v cargo &> /dev/null
+then
+    . "$HOME/.cargo/env"
+fi
 
 ### Go
 GOBIN="$(go env GOBIN)"
 GOPATH="$(go env GOPATH)"
 PATH="$PATH:${GOBIN:=${GOPATH}/bin}"
 
-### Node/Yarn
-YARN_BIN="$(yarn global bin)"
-PATH="$PATH:$YARN_BIN"
+### Node/Yarn (if yarn exists)
+if command -v yarn &> /dev/null
+then
+    YARN_BIN="$(yarn global bin)"
+    PATH="$PATH:$YARN_BIN"
+fi
 
 ## Local env
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
