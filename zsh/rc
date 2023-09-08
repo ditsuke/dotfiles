@@ -126,11 +126,15 @@ alias fzf="fzf --layout=reverse --height='30%'"
 alias fzfp="fzf --preview='bat {}'"
 alias edit-fzf="$EDITOR \"\$(fzf)\""
 alias e="$EDITOR"
+alias ai="mods"
 
 ### Habits from windows land and more
 alias where="which"
 alias cls="clear"
 alias open="xdg-open"
+
+### So I don't need to remember weird binary names
+alias cleandevartifacts="kondo --older 3w"
 
 ### Gnome Utilities
 
@@ -189,3 +193,41 @@ function download_m3u8 {
   ffmpeg -protocol_whitelist "file,http,https,tcp,tls,crypto" -i $1 -c copy -bsf:a aac_adtstoasc $2
 }
 
+# Function to randomize filenames in a directory while preserving extensions
+randomize_filenames() {
+  # Directory path (default: current directory)
+  local directory="${1:-.}"
+
+  # Move to the directory
+  cd "$directory" || return 1
+
+  # Iterate over files in the directory
+  for file in *; do
+    # Check if the item is a file
+    if [[ -f $file ]]; then
+      # Check if the file name is already randomized
+      # HACK: this check is weak, but its the best we can do
+      # without storing the generated names in a datastore.
+      if [[ $file =~ ^[[:alnum:]]{12}\.[[:alnum:]]+$ ]]; then
+        echo "Skipping already randomized file: '$file'"
+      else
+        # Generate a random name
+        local random_name=$(mktemp -u XXXXXXXXXXXX)
+        
+        # Get the file extension
+        local extension="${file##*.}"
+        
+        # Rename the file with the random name and original extension
+        mv "$file" "$random_name.$extension"
+        
+        echo "Renamed '$file' to '$random_name.$extension'"
+      fi
+    fi
+  done
+
+  echo "File name randomization complete."
+}
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

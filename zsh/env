@@ -1,5 +1,10 @@
 # Environment
 
+export XDG_CONFIG_HOME=${HOME}/.config
+export XDG_CACHE_HOME=${HOME}/.cache
+export XDG_DATA_HOME=${HOME}/.local/share
+export XDG_STATE_HOME=${HOME}/.local/state
+
 ## ZSH Config Path
 #export ZDOTDIR="$HOME/.config/zsh"
 
@@ -41,7 +46,6 @@ then
     PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 
-export PATH
 
 ## Jetbrains Toolbox
 if ! [[ "$PATH" =~ "$HOME/.local/share/JetBrains/Toolbox/scripts" ]]
@@ -49,8 +53,9 @@ then
 	PATH="$HOME/.local/share/JetBrains/Toolbox/scripts:$PATH"
 fi
 
+export PATH
+
 ## GTK
 ### Use ibus as the input method module (bid to disable the ctrl-shift-u shortkey)
-GTK_IM_MODULE=ibus
-
+export GTK_IM_MODULE=ibus
 
