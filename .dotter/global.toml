@@ -4,7 +4,8 @@
 depends = []
 
 [default.files]
-".gitconfig" = "~/.gitconfig"
+"git/config" = "~/.gitconfig"
+"git/global-ignore" = "~/.gitignore_global"
 "vim/.vimrc" = "~/.vimrc"
 ".ideavimrc" = "~/.ideavimrc"
 "powershell" = "~/.powershell"
@@ -24,6 +25,7 @@ depends = []
 "kitty" = { target = "~/.config/kitty", type = "symbolic" }
 "alacritty" = { target = "~/.config/alacritty", type = "symbolic" }
 "ipython/ipython_config.py" = "~/.ipython/profile_default/ipython_config.py"
+"nix" = "~/.config/nix"
 
 [default.variables]
 git_name = "ditsuke"
@@ -40,5 +42,11 @@ depends = []
 [pop-shell]
 depends = []
 
-[pop-shekll.files]
+[pop-shell.files]
 "pop-shell" = "~/.config/pop-shell"
+
+[lg-gram]
+depends = []
+
+[lg-gram.files]
+"gram/fix-service.service" = "/etc/systemd/system/lg-gram.service"
