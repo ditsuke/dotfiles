@@ -2,58 +2,7 @@
 
 #################-- Stuff we're going to install --#################
 brew_stuff=(
-	"7zip"
-	"difftastic" # Structural, syntax-aware difftool
-	"gh"         # GitHub CLI
-	"fx"         # Interactive JSON browser
-	"neovim"
-	"micro" # Simple(r) CLI text editor
-	"tmate" # Instant terminal sharing :-:
-	"croc"
-	"gitui"   # Intuitive TUI for git.
-	"lazygit" # Another TUI for git, even more powerful than `gitui`
-	"bat"     # cat clone with syntax highlighting
-	"bit"
-	"htop"   # interactive top -- process monitor
-	"bottom" # system monitor
-	"broot"  # CLI filesystem explorer and launcher
-	"llama"  # CLI file manager, quick launcher. Very simple, very nice
-	"dust"   # An intuitive `du` alternative
-	"fd"
-	"exa"     # modern alternative to ls -- better colors, more attributes and git-aware
-	"fselect" # file-finder with SQL-like queries
-	"fzf"
-	"glow"
-	"rclone" # rsync for the cloud
-	"ripgrep"
-	"starship" # cross-shell prompt
-	"sd"
-	"wireshark"
-	"zoxide"              # `z` in rust -- navigate the filesystem fast
-	"isacikgoz/taps/tldr" # tldr -- simplified manpages
-	"kondo"               # save space by cleaning up dev files (node_modules et al)
-	"neofetch"            # quick system info
-	"zsh-completions"
-	"postgresql@14"
-	"direnv" # load environment variables from .envrc and .env files, recursively from CWD
-	"ghq"    # Manage remote git repositories
-	"viu"    # View images from the terminal. Works with kitty (or iTerm on mac).
-	## devops
-	"flyctl"
-	"awscli"
-	"terraform"
-	## build tools
-	"cmake"
-	"ninja"
-	"meson"
-	"docker-buildx" # TODO: remove this
-	## compilers
-	"protobuf"
-	"bufbuild/buf/buf" # Tooling for protobufs -- dep management, linting and generation all in one binary.
-	"openjdk@17"
-	"go"
-	## dev-deps
-	"golangci-lint"
+
 )
 
 cargo_binstall_stuff=(
@@ -147,6 +96,10 @@ flathub_stuff=(
 )
 
 ####################################################################
+# Nix
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
+nix profile install . # Install our flake
+# TODO: we need a way to trigger updates
 
 # DNF
 
@@ -208,6 +161,7 @@ cargo install cargo-binstall
 for stuff in "${cargo_binstall_stuff[@]}"; do
 	cargo binstall "${stuff}" --no-confirm
 done
+
 
 # Brew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
