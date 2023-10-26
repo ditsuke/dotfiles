@@ -13,13 +13,12 @@
         name = "my-env";
         paths = with pkgs; [
           nix-tree # Interactively browse dependency graphs of Nix derivations
-          direnv
           jless
           taskwarrior
           taskwarrior-tui
 
 
-          zip
+          p7zip
           difftastic # Structural, syntax-aware difftool
           gh # GitHub CLI
           fx # Interactive JSON browser
@@ -28,7 +27,9 @@
           croc
           gitui # Intuitive TUI for git.
           lazygit # Another TUI for git, even more powerful than `gitui`
+          lazydocker # TUI for docker
           bat # cat clone with syntax highlighting
+          lnav
           bit
           htop # interactive top -- process monitor
           bottom # system monitor
@@ -64,7 +65,9 @@
           ninja
           meson
           ## compilers and interpreters
+          rtx # Runtime Executor (asdf-plugin compatible) [github.com:jdx/rtx]
           nodejs
+          bun
           protobuf
           buf # Tooling for protobufs -- dep management, linting and generation all in one binary.
           go
