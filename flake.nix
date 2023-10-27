@@ -2,6 +2,7 @@
   description = "My personal flake";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # TODO: add nvim-nightly
   };
 
   outputs = { self, nixpkgs }: {
@@ -18,6 +19,7 @@
           taskwarrior-tui
 
 
+          atuin # Alternative, synced shell history backed by an sqlite DB
           p7zip
           difftastic # Structural, syntax-aware difftool
           gh # GitHub CLI
