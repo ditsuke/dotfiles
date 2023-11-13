@@ -26,6 +26,7 @@ depends = []
 "alacritty" = { target = "~/.config/alacritty", type = "symbolic" }
 "ipython/ipython_config.py" = "~/.ipython/profile_default/ipython_config.py"
 "nix" = "~/.config/nix"
+"atuin" = "~/.config/atuin"
 
 [default.variables]
 git_name = "ditsuke"
