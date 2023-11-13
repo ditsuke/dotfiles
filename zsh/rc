@@ -170,11 +170,24 @@ source "$HOME/.config/broot/launcher/bash/br"
 ### Brew
 if type brew &>/dev/null; then
 	FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-	autoload -Uz compinit
-	compinit
 fi
 ### pipx
 eval "$(register-python-argcomplete pipx)"
+### `just`
+if command -v just >/dev/null 2>&1; then
+    # Check if the zsh_completion file exists
+    if [ ! -f ~/.cache/just/zsh/_just ]; then
+        # Create the cache directory if it doesn't exist
+        mkdir -p ~/.cache/just/zsh
+        # Generate the completion script
+        just --completions zsh > ~/.cache/just/zsh/_just
+    fi
+    # Add ~/.cache/just to fpath
+    fpath=(~/.cache/just/zsh $fpath)
+fi
+export FPATH
+autoload -Uz compinit
+compinit
 
 ## Functions
 
