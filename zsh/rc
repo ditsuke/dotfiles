@@ -173,18 +173,25 @@ if type brew &>/dev/null; then
 fi
 ### pipx
 eval "$(register-python-argcomplete pipx)"
-### `just`
-if command -v just >/dev/null 2>&1; then
-    # Check if the zsh_completion file exists
-    if [ ! -f ~/.cache/just/zsh/_just ]; then
-        # Create the cache directory if it doesn't exist
-        mkdir -p ~/.cache/just/zsh
-        # Generate the completion script
-        just --completions zsh > ~/.cache/just/zsh/_just
-    fi
-    # Add ~/.cache/just to fpath
-    fpath=(~/.cache/just/zsh $fpath)
-fi
+
+COMPLETIONS_PATH=~/.cache/zsh/completions
+function generate_completions() {
+	local cmd=$1
+	local comp_cmd=$2
+
+	if command -v "$cmd" >/dev/null 2>&1; then
+		comp_script="$COMPLETIONS_PATH/_$cmd"
+		if [ ! -f "$comp_script" ]; then
+			mkdir -p $COMPLETIONS_PATH
+			eval $comp_cmd > "$comp_script"
+		fi
+	fi
+}
+
+generate_completions "just" "just --completions zsh"
+generate_completions "gh" "gh completion -s zsh"
+generate_completions "flamegraph" "flamegraph --completions zsh"
+fpath=($COMPLETIONS_PATH $fpath)
 export FPATH
 autoload -Uz compinit
 compinit
