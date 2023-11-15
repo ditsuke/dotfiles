@@ -2,10 +2,11 @@
   description = "My personal flake";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # TODO: add nvim-nightly
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
-  outputs = { self, nixpkgs }: {
+  outputs = { self, nixpkgs, ... } @ inputs: {
+    nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlay ];
     packages.x86_64-linux.default =
       let
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
@@ -13,6 +14,7 @@
       pkgs.buildEnv {
         name = "my-env";
         paths = with pkgs; [
+          neovim
           nix-tree # Interactively browse dependency graphs of Nix derivations
           jless
           taskwarrior
