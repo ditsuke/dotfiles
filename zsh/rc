@@ -220,18 +220,38 @@ function download_m3u8 {
 randomize_filenames() {
   # Directory path (default: current directory)
   local directory="${1:-.}"
+  local recursive="${2:-false}"
 
   # Move to the directory
   cd "$directory" || return 1
 
+  local files=()
+  if [[ "$recursive" == "true" ]]; then
+    echo "Recursively randomizing file names in '$directory'..."
+    # Get all files in the directory recursively
+    while IFS= read -r -d '' file; do
+      files+=("$file")
+    done < <(find "$directory" -type f -print0)
+  else
+    # Get all files in the directory
+    files=(*)
+    echo "Randomizing file names in '$directory'..."
+    # print all files in the directory
+    echo "${files[@]}"
+  
+  fi
+
   # Iterate over files in the directory
-  for file in *; do
+  for file in "${files[@]}"; do
     # Check if the item is a file
-    if [[ -f $file ]]; then
+    if [[ -f "$file" ]]; then
+      local file_name="$(basename "$file")"
+      local parent_path="$(dirname "$file")"
+
       # Check if the file name is already randomized
       # HACK: this check is weak, but its the best we can do
       # without storing the generated names in a datastore.
-      if [[ $file =~ ^[[:alnum:]]{12}\.[[:alnum:]]+$ ]]; then
+      if [[ "$file_name" =~ ^[[:alnum:]]{12}\.[[:alnum:]]+$ ]]; then
         echo "Skipping already randomized file: '$file'"
       else
         # Generate a random name
@@ -241,7 +261,7 @@ randomize_filenames() {
         local extension="${file##*.}"
         
         # Rename the file with the random name and original extension
-        mv "$file" "$random_name.$extension"
+        mv "$file" "$parent_path/$random_name.$extension"
         
         echo "Renamed '$file' to '$random_name.$extension'"
       fi
