@@ -171,6 +171,9 @@ source "$HOME/.config/broot/launcher/bash/br"
 if type brew &>/dev/null; then
 	FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
+if type nix &>/dev/null; then
+	fpath=(~/.nix-profile/share/zsh/vendor-completions ~/.nix-profile/share/zsh/site-functions $fpath)
+fi
 ### pipx
 eval "$(register-python-argcomplete pipx)"
 
@@ -189,7 +192,7 @@ function generate_completions() {
 }
 
 generate_completions "just" "just --completions zsh"
-generate_completions "gh" "gh completion -s zsh"
+# generate_completions "gh" "gh completion -s zsh"
 generate_completions "flamegraph" "flamegraph --completions zsh"
 fpath=($COMPLETIONS_PATH $fpath)
 export FPATH
