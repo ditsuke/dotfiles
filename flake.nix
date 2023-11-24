@@ -21,7 +21,7 @@
           taskwarrior
           taskwarrior-tui
 
-
+          git # just so we have the latest version
           atuin # Alternative, synced shell history backed by an sqlite DB
           p7zip
           difftastic # Structural, syntax-aware difftool
