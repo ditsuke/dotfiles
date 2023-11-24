@@ -14,6 +14,7 @@
       pkgs.buildEnv {
         name = "my-env";
         paths = with pkgs; [
+          dotter # dotfile manager
           neovim
           nix-tree # Interactively browse dependency graphs of Nix derivations
           jless
@@ -31,9 +32,10 @@
           croc
           gitui # Intuitive TUI for git.
           lazygit # Another TUI for git, even more powerful than `gitui`
+          cntr # `docker exec` on steroids
           lazydocker # TUI for docker
           bat # cat clone with syntax highlighting
-          lnav
+          lnav # log file viewer, indexer!
           bit
           htop # interactive top -- process monitor
           bottom # system monitor
@@ -47,6 +49,10 @@
           glow
           rclone # rsync for the cloud
           ripgrep
+          unzip # zip and unzip
+          sysbench # benchmarking tool
+          docker-compose
+          cloudflared # cloudflare tunnel
 
           starship # cross-shell prompt
           sd
@@ -55,6 +61,7 @@
           tldr # tldr -- simplified manpages
           kondo # save space by cleaning up dev files (node_modules et al)
           neofetch # quick system info
+          zsh
           zsh-completions
           direnv # load environment variables from .envrc and .env files, recursively from CWD
           ghq # Manage remote git repositories
