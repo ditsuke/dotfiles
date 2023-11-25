@@ -85,6 +85,7 @@ plugins=(
 	zsh-interactive-cd
 	aws
 	docker
+	taskwarrior
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -164,7 +165,8 @@ print-path() {
 ## Prompt
 eval "$(starship init zsh)"
 
-source "$HOME/.config/broot/launcher/bash/br"
+# broot the file browser
+[ -f ~/.config/broot/launcher/bash/br ] && source ~/.config/broot/launcher/bash/br
 
 ## Completions
 ### Brew

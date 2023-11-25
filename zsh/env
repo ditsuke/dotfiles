@@ -23,7 +23,7 @@ PATH="$PATH:${HOMEBREW_DIR}/bin:${HOMEBREW_DIR}/sbin"
 #eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 ### Cargo (if exist)
-if [ -d $HOME/.cargo ]
+if [ -f $HOME/.cargo/env ]
 then
     . "$HOME/.cargo/env"
 fi
