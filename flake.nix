@@ -20,6 +20,7 @@
           jless
           taskwarrior
           taskwarrior-tui
+          zellij # terminal multiplexer
 
           git # just so we have the latest version
           atuin # Alternative, synced shell history backed by an sqlite DB
