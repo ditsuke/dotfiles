@@ -6,16 +6,19 @@
   };
 
   outputs = { self, nixpkgs, ... } @ inputs: {
-    nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlay ];
-    packages.x86_64-linux.default =
+    # TODO: Generalize to all platforms
+    packages.x86_64-linux.d2xyz =
       let
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          overlays = [ inputs.neovim-nightly-overlay.overlay ];
+        };
       in
       pkgs.buildEnv {
-        name = "my-env";
+        name = "ditsuke's nix env";
         paths = with pkgs; [
+          neovim-nightly
           dotter # dotfile manager
-          neovim
           nix-tree # Interactively browse dependency graphs of Nix derivations
           jless
           taskwarrior
