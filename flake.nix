@@ -57,6 +57,7 @@
           sysbench # benchmarking tool
           docker-compose
           cloudflared # cloudflare tunnel
+          topgrade # update all the things with a single command
 
           starship # cross-shell prompt
           sd
@@ -77,6 +78,7 @@
           awscli
           ## build tools
           cmake
+          just
           ninja
           meson
           ## compilers and interpreters
@@ -86,10 +88,11 @@
           protobuf
           buf # Tooling for protobufs -- dep management, linting and generation all in one binary.
           go
+          rustup # rustup -- rust toolchain installer
+          pipx # pipx -- install python packages in isolated environments
           ## dev-deps
           golangci-lint
         ];
       };
-
   };
 }
