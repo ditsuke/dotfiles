@@ -11,13 +11,13 @@
       let
         pkgs = import nixpkgs {
           system = "x86_64-linux";
-          overlays = [ inputs.neovim-nightly-overlay.overlay ];
+          overlays = [ inputs.neovim-nightly-overlay.overlays.default ];
         };
       in
       pkgs.buildEnv {
         name = "ditsuke's nix env";
         paths = with pkgs; [
-          neovim-nightly
+          neovim
           dotter # dotfile manager
           nix-tree # Interactively browse dependency graphs of Nix derivations
           jless
