@@ -1,0 +1,11 @@
+[Unit]
+Description=Fixes many issues with the 2022 LG Grams running Linux and sets charging limit to 80
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/lg-gram-fixes.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+

@@ -52,4 +52,5 @@ depends = []
 depends = []
 
 [lg-gram.files]
-"gram/fix-service.service" = "/etc/systemd/system/lg-gram.service"
+"gram/fix-gram.service" = { target = "/etc/systemd/system/fix-gram.service", type = "template", owner = "root" }
+"gram/lg-gram-fixes.sh" = { target = "/usr/local/bin/lg-gram-fixes.sh", type = "template", owner = "root" }
