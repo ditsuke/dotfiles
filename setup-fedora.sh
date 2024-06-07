@@ -1,106 +1,82 @@
 #!/bin/bash
 
-#################-- Stuff we're going to install --#################
-brew_stuff=(
-
-)
-
-cargo_binstall_stuff=(
-	"dotter" # dotfiles manager
-	"just"   # just a command runner
-	"cargo-make"
-	"cargo-update"
-	"topgrade" # system updater on steroids
-)
+./common.sh
 
 dnf_stuff=(
-	"neovim"
-	"python-neovim"
-	"zsh"
-	"python3-pip"  # use pip to install pipx :D
-	"sqlite3"      # some dnf shell-completions need sqlite
-	"sqlite-devel" # Some neovim extensions require both sqlite and sqlite-devel
-	"howdy"        # Windows Hello-like facial recognition for Linux
-	"ffmpeg"
-	"xsel"      # interface with the system clipboard. neovim uses this as the clipboard provider.
-	"cronie"    # crontab
-	"gammastep" # color temp, brightness control | ! Mark
-	"docker"
-	"docker-compose"
-	"tlp"          # Optimise better life
-	"bluez"        # bluetooth from the cli (?)
-	"strace"       # trace processes
-	"tailscale"    # easy mesh VPN++
-	"wev"          # wayland input viewer -- installed while I'm debugging the input lag/misses on AC
-	"dconf-editor" # Edit the dconf k-v store with a GUI
-	"qalc"         # CLI calculator, hooks up to frontends. Used by pop-launcher
-	"xprop"        # Manage window and font properties on X servers. Needed by the Unite shell extension.
+  "zsh"
+  "python3-pip"  # use pip to install pipx :D
+  "sqlite3"      # some dnf shell-completions need sqlite
+  "sqlite-devel" # Some neovim extensions require both sqlite and sqlite-devel
+  "howdy"        # Windows Hello-like facial recognition for Linux
+  "ffmpeg"
+  "xsel"      # interface with the system clipboard. neovim uses this as the clipboard provider.
+  "cronie"    # crontab
+  "gammastep" # color temp, brightness control | ! Mark
+  "docker"
+  "docker-compose"
+  "tlp"          # Optimise better life
+  "bluez"        # bluetooth from the cli (?)
+  "strace"       # trace processes
+  "tailscale"    # easy mesh VPN++
+  "wev"          # wayland input viewer -- installed while I'm debugging the input lag/misses on AC
+  "dconf-editor" # Edit the dconf k-v store with a GUI
+  "qalc"         # CLI calculator, hooks up to frontends. Used by pop-launcher
+  "xprop"        # Manage window and font properties on X servers. Needed by the Unite shell extension.
 
-	## TUIs
-	"powertop" # Monitor and diagnose issues with battery usage.
-	"joshuto"  # Ranger-like file management TUI written in Rust
+  ## TUIs
+  "powertop" # Monitor and diagnose issues with battery usage.
+  "joshuto"  # Ranger-like file management TUI written in Rust
 
-	## Language support
-	"perl"
+  ## Language support
+  "perl"
 
-	## Gnome shell extensions
-	"gnome-shell-extension-user-theme"
-	"pop-shell" # tiling extension from Pop OS!
+  ## Gnome shell extensions
+  "gnome-shell-extension-user-theme"
+  "pop-shell" # tiling extension from Pop OS!
 
-	## GUI apps
-	"code"        # VSCode, because yes
-	"kolourpaint" # KDE's image editor | ! mark for removal
-	"gnome-tweaks"
-	"gnome-extensions-app"
-	"gnome-power-manager"
-	"ulauncher"
-	"evolution"  # mail client
-	"ripcord"    # a lightweight native discord client
-	"kdiskmark"  # SSD benchmarking tool, like CrystalDiskMark but on Linux
-	"kitty"      # A better terminal emulator
-	"nsxiv"      # Simple, suckless image viewer (GUI)
-	"uget"       # Download manager
-	"obs-studio" # Open Broadcaster -- stream, record screen and more
+  ## GUI apps
+  "code"        # VSCode, because yes
+  "kolourpaint" # KDE's image editor | ! mark for removal
+  "gnome-tweaks"
+  "gnome-extensions-app"
+  "gnome-power-manager"
+  "ulauncher"
+  "evolution"  # mail client
+  "ripcord"    # a lightweight native discord client
+  "kdiskmark"  # SSD benchmarking tool, like CrystalDiskMark but on Linux
+  "kitty"      # A better terminal emulator
+  "nsxiv"      # Simple, suckless image viewer (GUI)
+  "uget"       # Download manager
+  "obs-studio" # Open Broadcaster -- stream, record screen and more
 
-	## build deps
-	"gcc-c++"
-	"cyrus-sasl-devel"
-	"libinput-devel"
-	"systemd-devel"
-	"libgtop2-devel"
-	"openssl-devel"
-	"gmp-devel"
+  ## build deps
+  "gcc-c++"
+  "cyrus-sasl-devel"
+  "libinput-devel"
+  "systemd-devel"
+  "libgtop2-devel"
+  "openssl-devel"
+  "gmp-devel"
 
-	"lm_sensors"
-	"lld"
-)
-
-pipx_stuff=(
-	"grip" # preview github-flavored markdown
-	"howdoi"
-	"poetry"
+  "lm_sensors"
+  "lld"
 )
 
 flathub_stuff=(
-	"md.obsidian.Obsidian"
-	"com.discordapp.Discord"
-	"org.telegram.desktop"
-	"org.gnome.Extensions"
-	"com.slack.Slack"
-	"com.sublimemerge.App"
-	"com.getpostman.Postman"
-	"io.bassi.Amberol"
-	"gg.guilded.Guilded"
-	"com.mattjakeman.ExtensionManager" # Manage gnome shell extensions?
-	"com.mongodb.Compass"
+  "md.obsidian.Obsidian"
+  "com.discordapp.Discord"
+  "org.telegram.desktop"
+  "org.gnome.Extensions"
+  "com.slack.Slack"
+  "com.sublimemerge.App"
+  "com.getpostman.Postman"
+  "io.bassi.Amberol"
+  "gg.guilded.Guilded"
+  "com.mattjakeman.ExtensionManager" # Manage gnome shell extensions?
+  "com.mongodb.Compass"
 )
 
 ####################################################################
-# Nix
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
-nix profile install . # Install our flake
-# TODO: we need a way to trigger updates
-
 # DNF
 
 ## Repos
@@ -132,7 +108,7 @@ sudo dnf config-manager --add-repo https://pkgs.tailscale.com/stable/fedora/tail
 
 ## Installs
 for stuff in "${dnf_stuff[@]}"; do
-	sudo dnf install "${stuff}" -y
+  sudo dnf install "${stuff}" -y
 done
 
 ### Services
@@ -146,39 +122,11 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 ## Start by installing pipx for isolated python app management (pypa.github.io/pipx)
 pip install pipx
 
-## Apps with pipx
-for stuff in "${pipx_stuff[@]}"; do
-	pipx install "${stuff}"
-done
-
-# Rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
-## One tool to get all (most) of those binaries without compiling
-cargo install cargo-binstall
-
-## Binaries with cargo
-for stuff in "${cargo_binstall_stuff[@]}"; do
-	cargo binstall "${stuff}" --no-confirm
-done
-
-
-# Brew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-## Taps
-brew tap isacikgoz/taps
-
-## Installs with brew
-for stuff in "${brew_stuff[@]}"; do
-	brew install "${stuff}"
-done
-
 # Flathub
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo # add flathub repo
 
 for stuff in "${flathub_stuff[@]}"; do
-	flatpak install flathub "${stuff}"
+  flatpak install flathub "${stuff}"
 done
 
 # AppImages
