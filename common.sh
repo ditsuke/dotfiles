@@ -35,7 +35,7 @@ cargo install cargo-binstall
 
 ## Cargo stuff
 for stuff in "${cargo_binstall_stuff[@]}"; do
-	cargo binstall "${stuff}"
+	cargo binstall "${stuff}" --no-confirm
 done
 
 # Pipx stuff
@@ -44,7 +44,7 @@ for stuff in "${pipx_stuff[@]}"; do
 done
 
 # Brew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 ## Taps
 brew tap isacikgoz/taps
