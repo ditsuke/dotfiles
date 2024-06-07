@@ -21,8 +21,9 @@
           dotter # dotfile manager
           nix-tree # Interactively browse dependency graphs of Nix derivations
           jless
-          taskwarrior
+          taskwarrior3
           taskwarrior-tui
+          taskserver
           zellij # terminal multiplexer
 
           git # just so we have the latest version
