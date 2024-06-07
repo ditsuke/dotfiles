@@ -23,7 +23,7 @@
           jless
           taskwarrior3
           taskwarrior-tui
-          taskserver
+          taskchampion-sync-server
           zellij # terminal multiplexer
 
           git # just so we have the latest version
