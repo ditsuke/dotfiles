@@ -177,7 +177,7 @@ if type nix &>/dev/null; then
 	fpath=(~/.nix-profile/share/zsh/vendor-completions ~/.nix-profile/share/zsh/site-functions $fpath)
 fi
 ### pipx
-eval "$(register-python-argcomplete pipx)"
+# eval "$(register-python-argcomplete pipx)"
 
 COMPLETIONS_PATH=~/.cache/zsh/completions
 function generate_completions() {
