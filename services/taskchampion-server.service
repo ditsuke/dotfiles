@@ -1,0 +1,12 @@
+[Unit]
+Description=TaskChampion Sync Server
+After=network.target
+
+[Service]
+ExecStart="/home/{{ username }}/.nix-profile/bin/taskchampion-sync-server --port {{ taskserver-port }} --data-dir /home/{{ username }}/.taskchampion-data"
+Restart=always
+User={{ username }}
+
+[Install]
+WantedBy=multi-user.target
+

@@ -12,9 +12,7 @@ depends = []
 "bash/bashrc" = "~/.bashrc"
 "zsh/rc" = "~/.zshrc"
 "zsh/env" = "~/.zshenv"
-# "nvim" = "~/.config/nvim"
 "nvim-config" = "~/.config/nvim"
-# "astronvim" = "~/.config/astronvim"
 "tmux.conf" = "~/.tmux.conf"
 "gitui" = "~/.config/gitui"
 # discord with flatpak -- probably should be factored to a project
@@ -47,10 +45,3 @@ depends = []
 
 [pop-shell.files]
 "pop-shell" = "~/.config/pop-shell"
-
-[lg-gram]
-depends = []
-
-[lg-gram.files]
-"gram/fix-gram.service" = { target = "/etc/systemd/system/fix-gram.service", type = "template", owner = "root" }
-"gram/lg-gram-fixes.sh" = { target = "/usr/local/bin/lg-gram-fixes.sh", type = "template", owner = "root" }
