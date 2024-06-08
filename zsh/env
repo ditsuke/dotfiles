@@ -17,6 +17,9 @@ export CC=gcc
 
 ## PATH
 
+### Nix
+PATH="$HOME/.nix-profile/bin:$HOME/.nix-profile/sbin:$PATH"
+
 ### Homebrew
 HOMEBREW_DIR=/home/linuxbrew/.linuxbrew
 PATH="$PATH:${HOMEBREW_DIR}/bin:${HOMEBREW_DIR}/sbin"
