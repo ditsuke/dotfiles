@@ -1,0 +1,5 @@
+[services.files]
+"services/taskchampion-server.service" = { target = "/etc/systemd/system/taskchampion-server.service", type = "template", owner = "root" }
+
+[services.variables]
+taskserver-port = "50851"

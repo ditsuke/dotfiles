@@ -45,3 +45,6 @@ depends = []
 
 [pop-shell.files]
 "pop-shell" = "~/.config/pop-shell"
+
+[services]
+depends = []
