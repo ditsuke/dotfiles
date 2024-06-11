@@ -9,6 +9,7 @@ depends = []
 "vim/.vimrc" = "~/.vimrc"
 ".ideavimrc" = "~/.ideavimrc"
 "powershell" = "~/.powershell"
+"dotprofile" = "~/.profile"
 "bash/bashrc" = "~/.bashrc"
 "zsh/rc" = "~/.zshrc"
 "zsh/env" = "~/.zshenv"
