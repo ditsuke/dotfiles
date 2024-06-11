@@ -4,9 +4,11 @@ update-flake:
 update-neovim-nightly:
   nix flake lock --update-input neovim-nightly-overlay
 
-build:
+build-flake:
   nix build .#d2common
 
-update: build
+install-flake:
   nix profile remove d2common && nix profile install .#d2common
+
+update: build install-flake
   topgrade
