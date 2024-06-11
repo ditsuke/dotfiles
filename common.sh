@@ -20,7 +20,7 @@ pipx_stuff=(
 ####################################################################
 
 # Nix + nix stuff
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm --extra-conf "trusted-users = $(id -n -u)"
 nix profile install .#d2common # Install our flake
 # TODO: we need a way to trigger updates
 
