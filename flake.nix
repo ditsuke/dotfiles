@@ -97,11 +97,15 @@
             pipx # pipx -- install python packages in isolated environments
             ## dev-deps
             golangci-lint
+
+            # nix
+            cachix
           ];
           # linux optionals
           # powertop
         };
 
+        # TODO: I need a config-driven flow to enable gui and other optionals etc
         d2gui = pkgs.buildEnv {
           name = "gui stuff";
           paths = with pkgs; [
