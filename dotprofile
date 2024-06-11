@@ -1,3 +1,5 @@
+export NIXPKGS_ALLOW_UNFREE=1
+
 [[ -s $HOME/.cargo/env ]] && source $HOME/.cargo/env
 
 # Enable shells etc to pick up shared resources installed by nix (desktop files, completions etc)

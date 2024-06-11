@@ -21,7 +21,7 @@ pipx_stuff=(
 
 # Nix + nix stuff
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
-nix profile install .#d2xyz # Install our flake
+nix profile install .#d2common # Install our flake
 # TODO: we need a way to trigger updates
 
 # Tailscale
