@@ -110,12 +110,23 @@
           name = "gui stuff";
           paths = with pkgs; [
             nsxiv # Simple, suckless image viewer
-            alacritty
-            kitty
+
+            # FIXME: both kitty and alacritty are broken on nixpkgs#1a9df4f74273f90d04e621e8516777efcec2802a
+            # I can .. try again when I upgrade next
+            # Ref: https://github.com/NixOS/nixpkgs/issues/80936
+            # alacritty
+            # kitty
+
             uget
             obsidian
             sublime-merge
             ripcord # lightweight native discord client
+            (pgadmin4.override { server-mode = false; })
+            hoppscotch # api client
+            telegram-desktop
+            vesktop
+            slack
+            zoom-us
 
             # makes sense in a graphical environment
             xsel

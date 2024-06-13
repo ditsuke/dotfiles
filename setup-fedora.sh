@@ -5,6 +5,7 @@
 nix profile install .#d2gui # Install GUI stuff
 
 dnf_stuff=(
+	"kitty" # broken on nix
 	"zsh"
 	"sqlite3"      # some dnf shell-completions need sqlite
 	"sqlite-devel" # Some neovim extensions require both sqlite and sqlite-devel
@@ -30,15 +31,10 @@ dnf_stuff=(
 )
 
 flathub_stuff=(
-	"dev.vencord.Vesktop" # Snappier discord with screen sharing that works
 	"com.obsproject.studio"
-	"org.telegram.desktop"
 	"org.gnome.Extensions"
-	"com.slack.Slack"
-	"com.getpostman.Postman"
 	"io.bassi.Amberol"
 	"com.mattjakeman.ExtensionManager" # Manage gnome shell extensions?
-	"com.mongodb.Compass"
 	"io.github.jonmagon.kdiskmark"
 )
 
