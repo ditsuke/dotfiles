@@ -28,6 +28,8 @@ depends = []
 "nix" = "~/.config/nix"
 "atuin" = "~/.config/atuin"
 "zellij" = "~/.config/zellij"
+# systemd environment files
+"environment.d" = "~/.config/environment.d"
 
 [default.variables]
 git_name = "ditsuke"
