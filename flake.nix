@@ -95,6 +95,7 @@
             go
             rustup # rustup -- rust toolchain installer
             pipx # pipx -- install python packages in isolated environments
+            cargo-update # cargo subcommand to check/apply updates to installed executables
             ## dev-deps
             golangci-lint
 
