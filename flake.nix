@@ -27,7 +27,9 @@
             taskchampion-sync-server
             zellij # terminal multiplexer
 
-            git # just so we have the latest version
+			git # just so we have the latest version
+			git-credential-manager # cross-platform git credential storage
+			pass # standard unix password manager
             atuin # Alternative, synced shell history backed by an sqlite DB
             p7zip
             difftastic # Structural, syntax-aware difftool
@@ -88,7 +90,7 @@
             meson
             ## compilers and interpreters
             rtx # Runtime Executor (asdf-plugin compatible) [github.com:jdx/rtx]
-            nodejs
+            nodejs_18
             bun
             protobuf
             buf # Tooling for protobufs -- dep management, linting and generation all in one binary.
