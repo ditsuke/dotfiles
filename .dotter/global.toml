@@ -28,6 +28,7 @@ depends = []
 "nix" = "~/.config/nix"
 "atuin" = "~/.config/atuin"
 "zellij" = "~/.config/zellij"
+"topgrade.toml" = "~/.config/topgrade.toml"
 # systemd environment files
 "environment.d" = "~/.config/environment.d"
 
