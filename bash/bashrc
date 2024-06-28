@@ -1,3 +1,5 @@
+[[ $- != *i* ]] && return # Short-circuit if not running interactively (avoid breaking sftp rsync etc)
+
 # switch to zsh if it is installed
 if command -v zsh 2 &>/dev/null; then
 	# Check if the current shell is not zsh
