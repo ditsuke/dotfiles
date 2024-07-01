@@ -27,9 +27,9 @@
             taskchampion-sync-server
             zellij # terminal multiplexer
 
-			git # just so we have the latest version
-			git-credential-manager # cross-platform git credential storage
-			pass # standard unix password manager
+            git # just so we have the latest version
+            git-credential-manager # cross-platform git credential storage
+            pass # standard unix password manager
             atuin # Alternative, synced shell history backed by an sqlite DB
             p7zip
             difftastic # Structural, syntax-aware difftool
@@ -40,6 +40,10 @@
             croc
             gitui # Intuitive TUI for git.
             lazygit # Another TUI for git, even more powerful than `gitui`
+            kubectl # Kubernetes CLI
+            k9s # A TUI to interact with K8S clusters
+            minikube # Local Kubernetes cluster
+            lima
             cntr # `docker exec` on steroids
             lazydocker # TUI for docker
             bat # cat clone with syntax highlighting
