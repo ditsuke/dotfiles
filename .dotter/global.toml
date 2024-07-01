@@ -11,6 +11,7 @@ depends = []
 "powershell" = "~/.powershell"
 "dotprofile" = "~/.profile"
 "bash/bashrc" = "~/.bashrc"
+"bash/profile" = "~/.bash_profile"
 "zsh/rc" = "~/.zshrc"
 "zsh/env" = "~/.zshenv"
 "nvim-config" = "~/.config/nvim"

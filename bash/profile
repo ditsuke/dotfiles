@@ -1,0 +1,4 @@
+# bashrc is not sourced by default on SSH login, so we need to source it manually
+if [ -f ~/.bashrc ]; then
+	source "$HOME"/.bashrc
+fi
