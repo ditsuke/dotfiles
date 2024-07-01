@@ -4,6 +4,7 @@
 if command -v zsh 2 &>/dev/null; then
 	# Check if the current shell is not zsh
 	if [ -z "$ZSH_VERSION" ]; then
+		export SHELL=$(command -v zsh)
 		echo "Switching to zsh..."
 		export SHELL=$(command -v zsh)
 		exec zsh
