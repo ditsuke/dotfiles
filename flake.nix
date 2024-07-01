@@ -18,6 +18,7 @@
         d2common = pkgs.buildEnv {
           name = "common stuff";
           paths = with pkgs; [
+            zsh
             neovim
             dotter # dotfile manager
             nix-tree # Interactively browse dependency graphs of Nix derivations
