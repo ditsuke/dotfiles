@@ -21,8 +21,9 @@ pipx_stuff=(
 
 # Nix + nix stuff
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm --extra-conf "trusted-users = $(id -n -u)"
-nix profile install .#d2common # Install our flake
-# TODO: we need a way to trigger updates
+source /etc/profile.d/nix.sh             # Load the nix profile
+nix run nixpkgs#cachix use nix-community # binary cache that has neovim-nightly
+nix profile install .#d2common           # Install our flake
 
 # Tailscale
 curl -fsSL https://tailscale.com/install.sh | sh
@@ -56,4 +57,9 @@ done
 
 # Shell
 ## ohmyzsh for a _delightful_ ZSH experience. In all seriousness consider alternatives like prezto
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone https://github.com/ohmyzsh/ohmyzsh ~/.oh-my-zsh
+
+echo "Done installing base layer. Next steps:"
+echo "1. GUI? Install \`.#d2gui\`"
+echo "2. Install dotfiles with \`dotter\`"
+echo "3. Setup tailscale with \`sudo tailscale up\`"
