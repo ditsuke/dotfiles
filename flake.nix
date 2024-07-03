@@ -98,11 +98,13 @@
             flyctl
             awscli
             ## build tools
+            gnumake
             cmake
             just
             ninja
             meson
             ## compilers and interpreters
+            gcc
             mise # dev tools, env vars, task runner (asdf-plugin compatible) [github.com:jdx/rtx]
             nodejs_18
             bun
