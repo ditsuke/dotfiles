@@ -292,3 +292,10 @@ eval "$(atuin init zsh --disable-up-arrow)"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# Auto-switch to zellij on ssh connections -
+# disable with NOZ=1 (post login) or --no-rc (pre-login)
+if [[ $- =~ i ]] && [[ -z "$ZELLIJ" ]] && [[ -n "$SSH_TTY" ]] && [[ -z "$NOZ" ]]; then
+  echo "Activating zellij..."
+  zellij attach ssh_zellij || zellij -s ssh_zellij
+fi
