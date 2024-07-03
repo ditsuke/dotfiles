@@ -103,7 +103,7 @@
             ninja
             meson
             ## compilers and interpreters
-            rtx # Runtime Executor (asdf-plugin compatible) [github.com:jdx/rtx]
+            mise # dev tools, env vars, task runner (asdf-plugin compatible) [github.com:jdx/rtx]
             nodejs_18
             bun
             protobuf
