@@ -4,6 +4,9 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+# Auto clone oh-my-zsh if it doesn't exist
+[[ -d $ZSH ]] || { echo "Cloning ohmyzsh" ; git clone https://github.com/ohmyzsh/ohmyzsh.git $ZSH }
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -48,28 +51,19 @@ ZSH_THEME=
 # You can also set it to another string to have that shown instead of the default red dots.
 # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load?
+# Plugins to load.
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
 	vi-mode
@@ -97,26 +91,6 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-#
-
 ## Aliases
 alias vim="nvim +NoSession"
 alias cat="bat"
@@ -135,7 +109,7 @@ alias cls="clear"
 alias open="xdg-open"
 
 ### So I don't need to remember weird binary names
-alias cleandevartifacts="kondo --older 3w"
+alias clean-dev-artifacts="kondo --older 3w"
 
 [[ $TERM == "xterm-kitty" ]] && alias ssh='kitty +kitten ssh'
 
@@ -182,7 +156,9 @@ fi
 # eval "$(register-python-argcomplete pipx)"
 
 COMPLETIONS_PATH=~/.cache/zsh/completions
-function generate_completions() {
+# Generate completions for commands that support it
+# Usage: _generate-completions <command> <completion_command>
+function _generate-completions() {
 	local cmd=$1
 	local comp_cmd=$2
 
@@ -195,9 +171,8 @@ function generate_completions() {
 	fi
 }
 
-generate_completions "just" "just --completions zsh"
-# generate_completions "gh" "gh completion -s zsh"
-generate_completions "flamegraph" "flamegraph --completions zsh"
+_generate-completions "just" "just --completions zsh"
+_generate-completions "flamegraph" "flamegraph --completions zsh"
 fpath=($COMPLETIONS_PATH $fpath)
 export FPATH
 autoload -Uz compinit
@@ -221,52 +196,37 @@ function download_m3u8 {
 }
 
 # Function to randomize filenames in a directory while preserving extensions
-randomize_filenames() {
+randomize-filenames() {
   # Directory path (default: current directory)
   local directory="${1:-.}"
   local recursive="${2:-false}"
 
-  # Move to the directory
   cd "$directory" || return 1
 
   local files=()
   if [[ "$recursive" == "true" ]]; then
     echo "Recursively randomizing file names in '$directory'..."
-    # Get all files in the directory recursively
     while IFS= read -r -d '' file; do
       files+=("$file")
     done < <(find "$directory" -type f -print0)
   else
-    # Get all files in the directory
     files=(*)
     echo "Randomizing file names in '$directory'..."
-    # print all files in the directory
     echo "${files[@]}"
-  
   fi
 
-  # Iterate over files in the directory
   for file in "${files[@]}"; do
-    # Check if the item is a file
     if [[ -f "$file" ]]; then
       local file_name="$(basename "$file")"
       local parent_path="$(dirname "$file")"
-
-      # Check if the file name is already randomized
       # HACK: this check is weak, but its the best we can do
       # without storing the generated names in a datastore.
       if [[ "$file_name" =~ ^[[:alnum:]]{12}\.[[:alnum:]]+$ ]]; then
         echo "Skipping already randomized file: '$file'"
       else
-        # Generate a random name
         local random_name=$(mktemp -u XXXXXXXXXXXX)
-        
-        # Get the file extension
         local extension="${file##*.}"
-        
-        # Rename the file with the random name and original extension
         mv "$file" "$parent_path/$random_name.$extension"
-        
         echo "Renamed '$file' to '$random_name.$extension'"
       fi
     fi
@@ -288,12 +248,9 @@ docker-pruneall() {
     docker rmi -f $(docker images -qa)
 }
 
-## Atuin, alternative shell history
-eval "$(atuin init zsh --disable-up-arrow)"
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+## Atuin, alternative shell history, synced across machines.
+eval "$(atuin init zsh --disable-up-arrow)"
 
 # Auto-switch to zellij on ssh connections -
 # disable with NOZ=1 (post login) or --no-rc (pre-login)
