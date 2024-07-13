@@ -252,6 +252,11 @@ docker-pruneall() {
 ## Atuin, alternative shell history, synced across machines.
 eval "$(atuin init zsh --disable-up-arrow)"
 
+# Syntax highlighting with fast-syntax-highlighting!
+FSH_DIR=$HOME/.fsh
+[[ -d $FSH_DIR ]] || { echo "Cloning fsh" ; git clone https://github.com/zdharma-continuum/fast-syntax-highlighting $FSH_DIR }
+source $FSH_DIR/fast-syntax-highlighting.plugin.zsh
+
 # Auto-switch to zellij on ssh connections -
 # disable with NOZ=1 (post login) or --no-rc (pre-login)
 if [[ $- =~ i ]] && [[ -z "$ZELLIJ" ]] && [[ -n "$SSH_TTY" ]] && [[ -z "$NOZ" ]]; then
