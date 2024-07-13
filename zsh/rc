@@ -137,6 +137,8 @@ alias open="xdg-open"
 ### So I don't need to remember weird binary names
 alias cleandevartifacts="kondo --older 3w"
 
+[[ $TERM == "xterm-kitty" ]] && alias ssh='kitty +kitten ssh'
+
 ### Gnome Utilities
 
 #### Night light -- doesn't seem to really work when operating from gsettings/the command line
