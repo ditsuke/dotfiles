@@ -1,3 +1,3 @@
 [services.files]
 "gram/fix-gram.service" = { target = "/etc/systemd/system/fix-gram.service", type = "template", owner = "root" }
-"gram/lg-gram-fixes.sh" = { target = "/usr/local/bin/lg-gram-fixes.sh", type = "template", owner = "root" }
+"gram/fix-gram.sh" = { target = "/usr/local/bin/fix-gram.sh", type = "template", owner = "root" }

@@ -1,0 +1,6 @@
+[Unit]
+Description=Run taskwarrior sync
+
+[Service]
+Type=oneshot
+ExecStart=/home/{{ username }}/.local/bin/task-sync.sh

@@ -3,7 +3,7 @@ Description=Fixes many issues with the 2022 LG Grams running Linux and sets char
 
 [Service]
 Type=oneshot
-ExecStart=/usr/local/bin/lg-gram-fixes.sh
+ExecStart=/usr/local/bin/fix-gram.sh
 RemainAfterExit=yes
 
 [Install]

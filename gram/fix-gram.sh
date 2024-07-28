@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+# Fix various issues on LG Gram 12th generation machines
 
 # Fix GPE interrupts issue
 interrupt=/sys/firmware/acpi/interrupts/gpe6E

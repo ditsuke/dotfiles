@@ -34,6 +34,13 @@ depends = []
 "environment.d" = "~/.config/environment.d"
 "gnupg" = "~/.gnupg"
 
+# systemd services
+
+## task-sync
+"services/task-sync.sh" = { target = "~/.local/bin/task-sync.sh", type = "template" }
+"services/task-sync.service" = { target = "~/.config/systemd/user/task-sync.service", type = "template" }
+"services/task-sync.timer" = { target = "~/.config/systemd/user/task-sync.timer", type = "template" }
+
 [default.variables]
 git_name = "ditsuke"
 git_email = "ditsuke@protonmail.com"

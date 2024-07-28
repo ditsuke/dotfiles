@@ -3,7 +3,9 @@ export NIXPKGS_ALLOW_UNFREE=1
 [[ -s $HOME/.cargo/env ]] && source $HOME/.cargo/env
 
 # Enable shells etc to pick up shared resources installed by nix (desktop files, completions etc)
-[[ -s $HOME/.nix-profile ]] && export XDG_DATA_DIRS=$XDG_DATA_DIRS:$HOME/.nix-profile/share
+[[ -s $HOME/.nix-profile ]] && export \
+  XDG_DATA_DIRS=$XDG_DATA_DIRS:$HOME/.nix-profile/share \
+  PATH=$HOME/.nix-profile/bin:$PATH
 
 # If any jetbrains tools are installed via the toolbox, add the start scripts to the path
 [[ -s $HOME/.local/share/JetBrains/Toolbox/scripts ]] && export PATH=$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts
