@@ -23,6 +23,7 @@ pipx_stuff=(
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm --extra-conf "trusted-users = $(id -n -u)"
 source /etc/profile.d/nix.sh             # Load the nix profile
 nix run nixpkgs#cachix use nix-community # binary cache that has neovim-nightly
+nix run nixpkgs#cachix use d2kdot        # binary cache that covers non-overlap between cache.nixos.org and d2kcommon
 nix profile install .#d2common           # Install our flake
 
 # Tailscale

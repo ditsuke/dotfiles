@@ -4,3 +4,7 @@
 # cache
 .dotter/cache.toml
 .dotter/cache
+
+# nix
+/result
+.push-cachix
