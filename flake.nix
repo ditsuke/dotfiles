@@ -3,6 +3,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    nix-index = {
+      url = "github:nix-community/nix-index";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   nixConfig = {
@@ -119,6 +123,13 @@
 
             # nix
             cachix
+
+            # Find nix packages containing some specific file(s)
+            # This works by indexing built derivations in binary caches.
+            # Usage:
+            # - Build index with nix-index
+            # - Search for packages with nix-locate
+            inputs.nix-index.packages.x86_64-linux.default
           ];
           # linux optionals
           # powertop
