@@ -52,18 +52,20 @@
             fx # Interactive JSON browser
             micro # Simple(r) CLI text editor
             tmate # Instant terminal sharing :-:
-            croc
+            croc # Transfer files between machines securely
             gitui # Intuitive TUI for git.
             lazygit # Another TUI for git, even more powerful than `gitui`
             kubectl # Kubernetes CLI
             k9s # A TUI to interact with K8S clusters
             minikube # Local Kubernetes cluster
-            lima
+            lima # create and manage lightweight VMs
             cntr # `docker exec` on steroids
             lazydocker # TUI for docker
             bat # cat clone with syntax highlighting
             lnav # log file viewer, indexer!
-            bit
+
+            bit # TODO: remove?
+
             htop # interactive top -- process monitor
             bottom # system monitor
             broot # CLI filesystem explorer and launcher
@@ -73,10 +75,10 @@
             fd # find alternative
             eza # alternative to ls -- better colors, more attributes and git-aware
             fselect # file-finder with SQL-like queries
-            fzf
-            glow
+            fzf # fuzzy finder
+            glow # preview markdown files in the terminal
             rclone # rsync for the cloud
-            ripgrep
+            ripgrep # faster, modern grep
             unzip # zip and unzip
             sysbench # benchmarking tool
             docker-compose
@@ -86,18 +88,17 @@
             strace # system call tracer
 
             starship # cross-shell prompt
-            sd
-            wireshark
+            sd # sed alternative
             zoxide # `z` in rust -- navigate the filesystem fast
             tldr # tldr -- simplified manpages
             kondo # save space by cleaning up dev files (node_modules et al)
             neofetch # quick system info
-            zsh
             zsh-completions
             direnv # load environment variables from .envrc and .env files, recursively from CWD
             ghq # Manage remote git repositories
             viu # View images from the terminal. Works with kitty (or iTerm on mac).
             vhs # Write terminal GIFs as code for integration testing and demoing your CLI tools. Ref: github.com/charmbracelet/vhs
+            mods # AI on the command line
 
             ## devops
             flyctl
@@ -111,8 +112,6 @@
             ## compilers and interpreters
             gcc
             mise # dev tools, env vars, task runner (asdf-plugin compatible) [github.com:jdx/rtx]
-            nodejs_18
-            bun
             protobuf
             buf # Tooling for protobufs -- dep management, linting and generation all in one binary.
             go
@@ -123,7 +122,7 @@
             golangci-lint
 
             # nix
-            cachix
+            cachix # binary cache manager @ cachix.org
 
             # Find nix packages containing some specific file(s)
             # This works by indexing built derivations in binary caches.
@@ -141,6 +140,7 @@
           name = "gui stuff";
           paths = with pkgs; [
             nsxiv # Simple, suckless image viewer
+            wireshark # network protocol analyzer
 
             # FIXME: both kitty and alacritty are broken on nixpkgs#1a9df4f74273f90d04e621e8516777efcec2802a
             # I can .. try again when I upgrade next

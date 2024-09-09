@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./common.sh
+./setup-common.sh
 
 nix profile install .#d2gui # Install GUI stuff
 
@@ -34,7 +34,7 @@ flathub_stuff=(
 	"com.obsproject.studio"
 	"org.gnome.Extensions"
 	"io.bassi.Amberol"
-	"com.mattjakeman.ExtensionManager" # Manage gnome shell extensions?
+	"com.mattjakeman.ExtensionManager" # Manage gnome shell extensions
 	"io.github.jonmagon.kdiskmark"
 )
 

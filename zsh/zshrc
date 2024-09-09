@@ -110,6 +110,10 @@ if [[ -x "$(which zoxide)"  ]]; then
 	eval "$(zoxide init zsh)"
 fi
 
+if [[ -x "$(which mise)" ]]; then
+  eval "$(mise activate zsh)"
+fi
+
 ## Functions
 
 ### Print PATH
@@ -230,6 +234,7 @@ docker-pruneall() {
     docker rmi -f $(docker images --filter dangling=true -qa)
     docker volume rm $(docker volume ls --filter dangling=true -q)
     docker rmi -f $(docker images -qa)
+    docker system prune --all --force
 }
 
 

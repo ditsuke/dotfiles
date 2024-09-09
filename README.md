@@ -12,6 +12,8 @@ this repo's root.
 - Package manager: `nix`, Flatpak. Os-specific package managers are used when necessary.
 - Editor: Neovim.
 
+... And several tools that can be found in ./flake.nix
+
 ## Bootstrapping
 
 1. Fork + clone this repository, or just clone without forking!

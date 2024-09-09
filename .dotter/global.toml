@@ -30,6 +30,7 @@ depends = []
 "atuin" = "~/.config/atuin"
 "zellij" = "~/.config/zellij"
 "topgrade.toml" = "~/.config/topgrade.toml"
+"mise.toml" = "~/.config/mise/config.toml"
 # systemd environment files
 "environment.d" = "~/.config/environment.d"
 "gnupg" = "~/.gnupg"
