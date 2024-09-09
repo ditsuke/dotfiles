@@ -36,6 +36,7 @@
             dotter # dotfile manager
             nix-tree # Interactively browse dependency graphs of Nix derivations
             jless # pager for json/yaml data
+            jc # json-convert -- convert outputs of popular CLI tools to JSON/YAML
             taskwarrior3
             taskwarrior-tui
             taskchampion-sync-server
