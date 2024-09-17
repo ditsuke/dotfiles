@@ -34,7 +34,6 @@
             zsh
             neovim
             dotter # dotfile manager
-            nix-tree # Interactively browse dependency graphs of Nix derivations
             jless # pager for json/yaml data
             jc # json-convert -- convert outputs of popular CLI tools to JSON/YAML
             taskwarrior3
@@ -123,7 +122,7 @@
 
             # nix
             cachix # binary cache manager @ cachix.org
-
+            nix-tree # Interactively browse dependency graphs of Nix derivations
             # Find nix packages containing some specific file(s)
             # This works by indexing built derivations in binary caches.
             # Usage:
