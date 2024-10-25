@@ -16,7 +16,7 @@ push-cachix:
     echo "NOTE: Not pushing to cachix, enable with \`touch .push-cachix\`"
 
 install-flake: build-flake && push-cachix
-  nix profile remove d2common && nix profile install .#d2common --impure
+  nix profile remove d2common && nix profile install .#d2common --impure --priority 100
 
 build-install-gui: && push-cachix  # TODO: config-driven integration with `install-flake`
   nix build .#d2gui --impure
