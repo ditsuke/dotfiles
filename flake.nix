@@ -136,7 +136,7 @@
                 # Usage:
                 # - Build index with nix-index
                 # - Search for packages with nix-locate
-                inputs.nix-index.packages.x86_64-linux.default
+                inputs.nix-index.packages.${system}.default
               ]
               ++ lib.optionals (pkgs.stdenv.isLinux) [
                 strace # system call tracer
