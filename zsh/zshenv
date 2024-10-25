@@ -1,5 +1,4 @@
 # Environment
-
 export XDG_CONFIG_HOME=${HOME}/.config
 export XDG_CACHE_HOME=${HOME}/.cache
 export XDG_DATA_HOME=${HOME}/.local/share
@@ -18,11 +17,17 @@ export CC=gcc
 ## PATH
 
 ### Nix
-PATH="$HOME/.nix-profile/bin:$HOME/.nix-profile/sbin:$PATH"
+PATH="$PATH:$HOME/.nix-profile/bin:$HOME/.nix-profile/sbin"
 
 ### Homebrew
-HOMEBREW_DIR=/home/linuxbrew/.linuxbrew
-PATH="$PATH:${HOMEBREW_DIR}/bin:${HOMEBREW_DIR}/sbin"
+HOMEBREW_DIR_LINUX=/home/linuxbrew/.linuxbrew
+if [ -d $HOMEBREW_DIR_LINUX ] ; then
+	PATH="$PATH:${HOMEBREW_DIR}/bin:${HOMEBREW_DIR}/sbin"
+fi
+HOMEBREW_DIR_OSX=/opt/homebrew
+if [ -d $HOMEBREW_DIR_OSX ] ; then
+	eval "$($HOMEBREW_DIR_OSX/bin/brew shellenv)"
+fi
 #eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 ### Cargo (if exist)
