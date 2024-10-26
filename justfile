@@ -21,6 +21,7 @@ install-flake: build-flake && push-cachix
 build-install-gui: && push-cachix  # TODO: config-driven integration with `install-flake`
   nix build .#d2gui --impure
   nix profile remove d2gui && nix profile install .#d2gui --impure
+  ./scripts/link-nix-apps.sh
 
 update: build-flake install-flake
   topgrade

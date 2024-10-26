@@ -153,25 +153,37 @@
               nsxiv # Simple, suckless image viewer
               wireshark # network protocol analyzer
 
-              # FIXME: both kitty and alacritty are broken on nixpkgs#1a9df4f74273f90d04e621e8516777efcec2802a
-              # I can .. try again when I upgrade next
+              # NOTE: Both alacritty and kitty need `nixGL` to run on Linux, but run just fine OOTB on OSX.
+              # As such, desktop files created by Nix on Linux systems won't work without modification for
+              # these two.
               # Ref: https://github.com/NixOS/nixpkgs/issues/80936
-              # alacritty
-              # kitty
+              alacritty
+              kitty
 
-              uget
               obsidian
-              sublime-merge
-              ripcord # lightweight native discord client
-              (pgadmin4.override { server-mode = false; })
-              hoppscotch # api client
               telegram-desktop
+              zoom-us
+            ] ++ lib.optionals (pkgs.stdenv.isLinux) [
+              ripcord # lightweight native discord client
               vesktop
               slack
-              zoom-us
+              hoppscotch # api client
+              uget
+              sublime-merge
+              (pgadmin4.override { server-mode = false; })
 
               # makes sense in a graphical environment
               xsel
+            ] ++ lib.optionals (pkgs.stdenv.isDarwin) [
+              # NOTE: Sublime software does not have arm builds. In an attempt to get
+              # merge working on my aarch64 mac, I try to get the x86 build (to run with rosetta).
+              # Sadly this doesn't work even with NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM,
+              # failing with "expected a set but found null" on evaluation of the `sublime_merge`
+              # attribute. This might be resolved with a nixpkgs update at some point, or maybe I'm
+              # doing something wrong.
+              # I use the build from homebrew for now.
+              #
+              #nixpkgs.legacyPackages.x86_64-darwin.sublime-merge
             ];
           };
 
