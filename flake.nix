@@ -141,6 +141,12 @@
               ++ lib.optionals (pkgs.stdenv.isLinux) [
                 strace # system call tracer
                 cntr # `docker exec` on steroids
+              ] ++ lib.optionals (pkgs.stdenv.isDarwin && pkgs.stdenv.isAarch64) [
+                # Docker runtime backend by a transparent linux VM
+                # At the moment I haven't set up a service, start explicitly with
+                # `colima start` for a daemon, or `colima start --foreground`
+                colima
+                docker
               ];
             # linux optionals
             # powertop
