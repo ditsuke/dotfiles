@@ -158,6 +158,7 @@
             paths = with pkgs; [
               nsxiv # Simple, suckless image viewer
               wireshark # network protocol analyzer
+              qbittorrent # torrent client
 
               # NOTE: Both alacritty and kitty need `nixGL` to run on Linux, but run just fine OOTB on OSX.
               # As such, desktop files created by Nix on Linux systems won't work without modification for
