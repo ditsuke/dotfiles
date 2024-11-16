@@ -2,3 +2,4 @@
 usage = "latest"
 node = "18"
 bun = "latest"
+gcloud = "latest"
