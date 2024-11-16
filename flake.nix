@@ -123,6 +123,7 @@
                 buf # Tooling for protobufs -- dep management, linting and generation all in one binary.
                 go
                 rustup # rustup -- rust toolchain installer
+                shfmt # shell script formatter
                 pipx # pipx -- install python packages in isolated environments
                 cargo-update # cargo subcommand to check/apply updates to installed executables
                 ## dev-deps
@@ -170,6 +171,7 @@
               obsidian
               telegram-desktop
               zoom-us
+
             ] ++ lib.optionals (pkgs.stdenv.isLinux) [
               ripcord # lightweight native discord client
               vesktop
@@ -178,10 +180,13 @@
               uget
               sublime-merge
               (pgadmin4.override { server-mode = false; })
+              mpv # media player
 
               # makes sense in a graphical environment
               xsel
             ] ++ lib.optionals (pkgs.stdenv.isDarwin) [
+              iina # a modern media player for macOS, based on mpv
+
               # NOTE: Sublime software does not have arm builds. In an attempt to get
               # merge working on my aarch64 mac, I try to get the x86 build (to run with rosetta).
               # Sadly this doesn't work even with NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM,
@@ -191,6 +196,9 @@
               # I use the build from homebrew for now.
               #
               #nixpkgs.legacyPackages.x86_64-darwin.sublime-merge
+
+              # NOTE: Whatsapp derivation is broken as of 
+              #whatsapp-for-mac
             ];
           };
 
