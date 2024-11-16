@@ -90,7 +90,9 @@ alias lg="lazygit"
 ### Habits from windows land and more
 alias where="which"
 alias cls="clear"
-alias open="xdg-open"
+if ! command -v open &> /dev/null; then
+  alias open="xdg-open"
+fi
 
 ### So I don't need to remember weird binary names
 alias clean-dev-artifacts="kondo --older 3w"
