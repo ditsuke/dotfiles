@@ -69,6 +69,8 @@
                 minikube # Local Kubernetes cluster
                 lima # create and manage lightweight VMs
                 lazydocker # TUI for docker
+                dive # analyze docker images
+                docker-slim # docker image analysis, optimize
                 bat # cat clone with syntax highlighting
                 lnav # log file viewer, indexer!
 
