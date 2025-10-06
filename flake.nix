@@ -1,7 +1,7 @@
 {
   description = "My personal flake";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nix-index = {
       url = "github:nix-community/nix-index";
@@ -108,6 +108,7 @@
                 viu # View images from the terminal. Works with kitty (or iTerm on mac).
                 vhs # Write terminal GIFs as code for integration testing and demoing your CLI tools. Ref: github.com/charmbracelet/vhs
                 mods # AI on the command line
+                aider-chat # ai "pair programming"?
 
                 ## devops
                 flyctl
@@ -144,7 +145,8 @@
               ++ lib.optionals (pkgs.stdenv.isLinux) [
                 strace # system call tracer
                 cntr # `docker exec` on steroids
-              ] ++ lib.optionals (pkgs.stdenv.isDarwin && pkgs.stdenv.isAarch64) [
+              ]
+              ++ lib.optionals (pkgs.stdenv.isDarwin && pkgs.stdenv.isAarch64) [
                 # Docker runtime backend by a transparent linux VM
                 # At the moment I haven't set up a service, start explicitly with
                 # `colima start` for a daemon, or `colima start --foreground`
@@ -158,50 +160,55 @@
           # TODO: I need a config-driven flow to enable gui and other optionals etc
           d2gui = pkgs.buildEnv {
             name = "gui stuff";
-            paths = with pkgs; [
-              nsxiv # Simple, suckless image viewer
-              wireshark # network protocol analyzer
-              qbittorrent # torrent client
+            paths =
+              with pkgs;
+              [
+                nsxiv # Simple, suckless image viewer
+                wireshark # network protocol analyzer
+                qbittorrent # torrent client
 
-              # NOTE: Both alacritty and kitty need `nixGL` to run on Linux, but run just fine OOTB on OSX.
-              # As such, desktop files created by Nix on Linux systems won't work without modification for
-              # these two.
-              # Ref: https://github.com/NixOS/nixpkgs/issues/80936
-              alacritty
-              kitty
+                # NOTE: Both alacritty and kitty need `nixGL` to run on Linux, but run just fine OOTB on OSX.
+                # As such, desktop files created by Nix on Linux systems won't work without modification for
+                # these two.
+                # Ref: https://github.com/NixOS/nixpkgs/issues/80936
+                alacritty
+                kitty
 
-              obsidian
-              telegram-desktop
-              zoom-us
+                obsidian
+                telegram-desktop
+                zoom-us
+                #thunderbird-latest # email client
 
-            ] ++ lib.optionals (pkgs.stdenv.isLinux) [
-              ripcord # lightweight native discord client
-              vesktop
-              slack
-              hoppscotch # api client
-              uget
-              sublime-merge
-              (pgadmin4.override { server-mode = false; })
-              mpv # media player
+              ]
+              ++ lib.optionals (pkgs.stdenv.isLinux) [
+                ripcord # lightweight native discord client
+                vesktop
+                slack
+                hoppscotch # api client
+                uget
+                sublime-merge
+                (pgadmin4.override { server-mode = false; })
+                mpv # media player
 
-              # makes sense in a graphical environment
-              xsel
-            ] ++ lib.optionals (pkgs.stdenv.isDarwin) [
-              iina # a modern media player for macOS, based on mpv
+                # makes sense in a graphical environment
+                xsel
+              ]
+              ++ lib.optionals (pkgs.stdenv.isDarwin) [
+                iina # a modern media player for macOS, based on mpv
 
-              # NOTE: Sublime software does not have arm builds. In an attempt to get
-              # merge working on my aarch64 mac, I try to get the x86 build (to run with rosetta).
-              # Sadly this doesn't work even with NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM,
-              # failing with "expected a set but found null" on evaluation of the `sublime_merge`
-              # attribute. This might be resolved with a nixpkgs update at some point, or maybe I'm
-              # doing something wrong.
-              # I use the build from homebrew for now.
-              #
-              #nixpkgs.legacyPackages.x86_64-darwin.sublime-merge
+                # NOTE: Sublime software does not have arm builds. In an attempt to get
+                # merge working on my aarch64 mac, I try to get the x86 build (to run with rosetta).
+                # Sadly this doesn't work even with NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM,
+                # failing with "expected a set but found null" on evaluation of the `sublime_merge`
+                # attribute. This might be resolved with a nixpkgs update at some point, or maybe I'm
+                # doing something wrong.
+                # I use the build from homebrew for now.
+                #
+                #nixpkgs.legacyPackages.x86_64-darwin.sublime-merge
 
-              # NOTE: Whatsapp derivation is broken as of 
-              #whatsapp-for-mac
-            ];
+                # NOTE: Whatsapp derivation is broken as of 
+                #whatsapp-for-mac
+              ];
           };
 
         };
