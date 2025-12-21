@@ -1,7 +1,7 @@
 {
   description = "My personal flake";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nix-index = {
       url = "github:nix-community/nix-index";
@@ -20,11 +20,10 @@
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      flake-utils,
-      ...
+    { self
+    , nixpkgs
+    , flake-utils
+    , ...
     }@inputs:
     flake-utils.lib.eachDefaultSystem (
       system:
@@ -62,12 +61,12 @@
                 micro # Simple(r) CLI text editor
                 tmate # Instant terminal sharing :-:
                 croc # Transfer files between machines securely
-                gitui # Intuitive TUI for git.
+                #gitui # Intuitive TUI for git.
                 lazygit # Another TUI for git, even more powerful than `gitui`
                 kubectl # Kubernetes CLI
                 k9s # A TUI to interact with K8S clusters
                 minikube # Local Kubernetes cluster
-                lima # create and manage lightweight VMs
+                #lima # create and manage lightweight VMs # FIXME: insecure as of now, reenable
                 lazydocker # TUI for docker
                 dive # analyze docker images
                 docker-slim # docker image analysis, optimize
@@ -80,8 +79,8 @@
                 bottom # system monitor
                 broot # CLI filesystem explorer and launcher
                 joshuto # file manager tui
-                llama # CLI file manager, quick launcher. Very simple, very nice
-                du-dust # An intuitive `du` alternative
+                walk # CLI file manager, quick launcher. Very simple, very nice
+                dust # An intuitive `du` alternative
                 fd # find alternative
                 eza # alternative to ls -- better colors, more attributes and git-aware
                 fselect # file-finder with SQL-like queries
@@ -112,7 +111,7 @@
 
                 ## devops
                 flyctl
-                awscli
+                awscli2
                 ## build tools
                 gnumake
                 cmake
@@ -152,7 +151,8 @@
                 # `colima start` for a daemon, or `colima start --foreground`
                 colima
                 docker
-              ];
+              ]
+            ;
             # linux optionals
             # powertop
           };
