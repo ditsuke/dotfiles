@@ -151,6 +151,8 @@
                 # `colima start` for a daemon, or `colima start --foreground`
                 colima
                 docker
+                gnupg
+                pinentry_mac
               ]
             ;
             # linux optionals
