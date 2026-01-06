@@ -28,7 +28,7 @@
 [init]
 	defaultBranch = main
 [credential "https://github.com"]
-	helper = !/home/{{ username }}/.nix-profile/bin/gh auth git-credential
+	helper = !/{{#if dotter.macos}}Users{{else}}home{{/if}}/{{username}}/.nix-profile/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = !/home/{{ username }}/.nix-profile/bin/gh auth git-credential
+	helper = !/{{#if dotter.macos}}Users{{else}}home{{/if}}/{{username}}/.nix-profile/bin/gh auth git-credential
 

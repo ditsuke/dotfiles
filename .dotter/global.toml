@@ -29,6 +29,8 @@ depends = []
 "nix" = "~/.config/nix"
 "atuin" = "~/.config/atuin"
 "zellij" = "~/.config/zellij"
+"zed/keymap.json" = "~/.config/zed/keymap.json"
+"zed/settings.json" = "~/.config/zed/settings.json"
 "topgrade.toml" = "~/.config/topgrade.toml"
 "mise.toml" = "~/.config/mise/config.toml"
 # systemd environment files
@@ -46,7 +48,7 @@ depends = []
 git_name = "ditsuke"
 git_email = "ditsuke@protonmail.com"
 gpg_key_id = "8fd2153f4889541a54f1e09e71b6c31c8a5a9d21"
-gpg_binary = "/usr/bin/gpg"
+gpg_binary = "~/.nix-profile/bin/gpg"
 
 [fedora-gnome]
 depends = []
