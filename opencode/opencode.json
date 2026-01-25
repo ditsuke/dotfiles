@@ -1,0 +1,15 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  // Theme configuration
+  "theme": "opencode",
+  // "model": "anthropic/claude-sonnet-4-5",
+  "autoupdate": false,
+  "mcp": {
+    // No API key pass
+    "exa": {
+      "type": "remote",
+      "url": "https://mcp.exa.ai/mcp",
+      "enabled": true
+    }
+  }
+}
