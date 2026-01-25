@@ -7,6 +7,38 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "agent": {
+    "dock": "left",
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "claude-sonnet-4"
+    },
+    "model_parameters": []
+  },
+  "use_system_window_tabs": false,
+  "preview_tabs": {
+    "enabled": true
+  },
+  "tabs": {
+    "show_diagnostics": "errors",
+    "file_icons": true,
+    "git_status": true
+  },
+  "title_bar": {
+    "show_project_items": true,
+    "show_user_picture": true,
+    "show_sign_in": true,
+    "show_branch_icon": false
+  },
+  "status_bar": {
+    "active_language_button": true
+  },
+  "project_panel": {
+    "button": true
+  },
+  "tab_bar": {
+    "show": false
+  },
   "relative_line_numbers": "wrapped",
   "vim_mode": true,
   "ui_font_size": 16,
@@ -14,6 +46,6 @@
   "theme": {
     "mode": "dark",
     "light": "One Light",
-    "dark": "Ayu Dark"
+    "dark": "Gruvbox Dark Hard"
   }
 }

@@ -7,7 +7,7 @@
 // from the command palette.
 [
   {
-    "context": "Workspace",
+    "context": "Editor",
     "bindings": {
       // "shift shift": "file_finder::Toggle"
     },
@@ -19,22 +19,47 @@
     },
   },
   {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-j": "vim::MenuSelectNext",
+      "ctrl-k": "vim::MenuSelectPrevious",
+    },
+  },
+  {
     "context": "Editor && vim_mode == normal",
     "bindings": {
+      // Search
       "space f f": "file_finder::Toggle",
-      "space o": "project_panel::ToggleFocus",
-      "cmd-shift-h": "workspace::ToggleLeftDock",
+      "space s s": "outline::Toggle",
+      "space o": "file_finder::Toggle",
       "space f c": "command_palette::Toggle",
+      "space s c": "command_palette::Toggle",
+      "space ,": "tab_switcher::ToggleAll",
+      "ctrl-\\": "terminal_panel::Toggle",
+      "ctrl-`": "theme_selector::Toggle",
+      "g r": "editor::FindAllReferences",
+      "ctrl-p": "pane::ActivatePreviousItem",
+      "ctrl-n": "pane::ActivateNextItem",
+
+      "cmd-shift-h": "workspace::ToggleLeftDock",
       "space |": "workspace::NewFileSplitVertical",
       "space =": "workspace::NewFileSplitHorizontal",
       "space q": "pane::CloseActiveItem",
       "ctrl-s": "workspace::Save",
+      "cmd-s": "workspace::Save",
+
+      // Navigation
       "ctrl-l": "workspace::ActivatePaneRight",
       "ctrl-h": "workspace::ActivatePaneLeft",
       "ctrl-j": "workspace::ActivatePaneDown",
       "ctrl-k": "workspace::ActivatePaneUp",
-      "ctrl-\\": "terminal_panel::Toggle",
-      "ctrl-`": "theme_selector::Toggle",
+      "alt-space": "file_finder::Toggle",
+    },
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      "alt-space": "editor::ShowCompletions",
     },
   },
   {
