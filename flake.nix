@@ -51,6 +51,8 @@
                 zellij # terminal multiplexer
 
                 git # just so we have the latest version
+                diff-so-fancy # human readable diffs
+                delta # syntax-highlighting pager for git
                 git-credential-manager # cross-platform git credential storage
                 pass # standard unix password manager
                 atuin # Alternative, synced shell history backed by an sqlite DB
