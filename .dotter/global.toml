@@ -36,6 +36,7 @@ depends = []
 # systemd environment files
 "environment.d" = "~/.config/environment.d"
 "gnupg" = "~/.gnupg"
+"lazygit-config.yml" = "~/.config/jesseduffield/lazygit/config.yml"
 
 # systemd services
 
