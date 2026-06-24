@@ -169,8 +169,9 @@ function _generate-completions() {
 	local comp_cmd=$2
 
 	if command -v "$cmd" >/dev/null 2>&1; then
-		comp_script="$COMPLETIONS_PATH/_$cmd"
-		if [ ! -f "$comp_script" ]; then
+		local comp_script="$COMPLETIONS_PATH/_$cmd"
+		local bin=$(command -v "$cmd")
+		if [[ ! -f "$comp_script" || $bin -nt $comp_script ]]; then
 			mkdir -p $COMPLETIONS_PATH
 			eval $comp_cmd > "$comp_script"
 		fi
