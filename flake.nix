@@ -1,7 +1,7 @@
 {
   description = "My personal flake";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nix-index = {
       url = "github:nix-community/nix-index";
@@ -102,7 +102,7 @@
                 zoxide # `z` in rust -- navigate the filesystem fast
                 tldr # tldr -- simplified manpages
                 kondo # save space by cleaning up dev files (node_modules et al)
-                neofetch # quick system info
+                hyfetch # quick system info
                 zsh-completions
                 direnv # load environment variables from .envrc and .env files, recursively from CWD
                 ghq # Manage remote git repositories
@@ -128,7 +128,7 @@
                 go
                 rustup # rustup -- rust toolchain installer
                 shfmt # shell script formatter
-                pipx # pipx -- install python packages in isolated environments
+                #pipx # pipx -- install python packages in isolated environments
                 cargo-update # cargo subcommand to check/apply updates to installed executables
                 ## dev-deps
                 golangci-lint
