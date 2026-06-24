@@ -128,6 +128,11 @@ if command -v mise &>/dev/null; then
   _cached_eval mise "mise activate zsh"
 fi
 
+## Atuin, alternative shell history, synced across machines.
+_cached_eval atuin "atuin init zsh --disable-up-arrow"
+
+_cached_eval direnv "direnv hook zsh"
+
 ## Functions
 
 ### Print PATH
@@ -141,7 +146,9 @@ print-path() {
 #bindkey -v
 
 ## Prompt
-_cached_eval starship "starship init zsh"
+if command -v starship &>/dev/null; then
+  _cached_eval starship "starship init zsh"
+fi
 
 # broot the file browser
 [ -f ~/.config/broot/launcher/bash/br ] && source ~/.config/broot/launcher/bash/br
@@ -214,7 +221,7 @@ randomize-filenames() {
   local directory="${1:-.}"
   local recursive="${2:-false}"
 
-  cd "$directory" || return 1
+  pushd "$directory" > /dev/null || return 1
 
   local files=()
   if [[ "$recursive" == "true" ]]; then
@@ -246,6 +253,7 @@ randomize-filenames() {
   done
 
   echo "File name randomization complete."
+  popd > /dev/null
 }
 
 docker-containers-remove() {
@@ -262,11 +270,6 @@ docker-pruneall() {
     docker system prune --all --force
 }
 
-
-## Atuin, alternative shell history, synced across machines.
-_cached_eval atuin "atuin init zsh --disable-up-arrow"
-
-_cached_eval direnv "direnv hook zsh"
 
 # Syntax highlighting with fast-syntax-highlighting!
 FSH_DIR=$HOME/.fsh
