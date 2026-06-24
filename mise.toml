@@ -1,5 +1,8 @@
 [tools]
 usage = "latest"
-node = "18"
+node = "latest"
 bun = "latest"
 gcloud = "latest"
+
+[settings]
+idiomatic_version_file_enable_tools = ["node"]
