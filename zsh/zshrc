@@ -179,6 +179,8 @@ function _generate-completions() {
 
 _generate-completions "just" "just --completions zsh"
 _generate-completions "flamegraph" "flamegraph --completions zsh"
+_generate-completions "pnpm" "pnpm completion zsh"
+_generate-completions "but" "but completions zsh"
 fpath=($COMPLETIONS_PATH $fpath)
 export FPATH
 autoload -Uz compinit
