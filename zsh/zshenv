@@ -1,4 +1,15 @@
 # Environment
+
+_cached_eval_ttl() {
+  local key=$1 ttl=$2 init_cmd=$3
+  local cache="$HOME/.cache/zsh/ttl_${key}.zsh"
+  if [[ ! -f $cache || $(( $(date +%s) - $(stat -f %m $cache 2>/dev/null || echo 0) )) -gt $ttl ]]; then
+    mkdir -p "${cache:h}"
+    eval $init_cmd >| "$cache"
+  fi
+  source "$cache"
+}
+
 export XDG_CONFIG_HOME=${HOME}/.config
 export XDG_CACHE_HOME=${HOME}/.cache
 export XDG_DATA_HOME=${HOME}/.local/share
@@ -26,7 +37,7 @@ if [ -d $HOMEBREW_DIR_LINUX ] ; then
 fi
 HOMEBREW_DIR_OSX=/opt/homebrew
 if [ -d $HOMEBREW_DIR_OSX ] ; then
-	eval "$($HOMEBREW_DIR_OSX/bin/brew shellenv)"
+	_cached_eval_ttl brew_shellenv 86400 "$HOMEBREW_DIR_OSX/bin/brew shellenv"
 fi
 #eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
@@ -37,15 +48,25 @@ then
 fi
 
 ### Go
-GOBIN="$(go env GOBIN)"
-GOPATH="$(go env GOPATH)"
+_cached_eval_ttl go_env 86400 'echo "GOBIN=\"$(go env GOBIN)\"; GOPATH=\"$(go env GOPATH)\""'
 PATH="$PATH:${GOBIN:=${GOPATH}/bin}"
 
-### Node/Yarn (if yarn exists)
-if command -v yarn &> /dev/null
+### Node/Yarn
+if command -v yarn &>/dev/null; then
+	_cached_eval_ttl yarn_global_bin 86400 '(cd ~ && echo "PATH=\"\$PATH:$(yarn global bin 2>/dev/null)\"")'
+fi
+
+# if command -v pnpm &> /dev/null
+# then
+	PNPM_BIN="$HOME/.local/share/bin/pnpm"
+	PATH="$PATH:$PNPM_BIN"
+# fi
+
+
+if command -v bun &> /dev/null
 then
-    YARN_BIN="$(yarn global bin)"
-    PATH="$PATH:$YARN_BIN"
+	BUN_BIN="$HOME/.cache/.bun/bin"
+	PATH="$PATH:$BUN_BIN"
 fi
 
 ## Local env

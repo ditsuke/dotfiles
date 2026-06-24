@@ -105,6 +105,7 @@ alias clean-dev-artifacts="kondo --older 3w"
 alias night-light-on="gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true"
 alias night-light-off="gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled false"
 
+
 _cached_eval() {
   local cmd=$1
   local init_cmd=$2
@@ -138,6 +139,12 @@ _cached_eval direnv "direnv hook zsh"
 ### Print PATH
 print-path() {
 	echo $PATH | sed "s/:/\n/g"
+}
+
+### Wipe zsh init cache (forces _cached_eval and _cached_eval_ttl to regenerate)
+zsh-cache-clear() {
+	rm -f ~/.cache/zsh/init_*.zsh ~/.cache/zsh/ttl_*.zsh
+	echo "zsh cache cleared"
 }
 
 ## Keybindings
