@@ -105,15 +105,27 @@ alias clean-dev-artifacts="kondo --older 3w"
 alias night-light-on="gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true"
 alias night-light-off="gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled false"
 
+_cached_eval() {
+  local cmd=$1
+  local init_cmd=$2
+  local cache="$HOME/.cache/zsh/init_${cmd}.zsh"
+  local bin=$(command -v "$cmd")
+  if [[ ! -f $cache || $bin -nt $cache ]]; then
+    mkdir -p "${cache:h}"
+    eval $init_cmd > "$cache"
+  fi
+  source "$cache"
+}
+
 ## Hooks
 
 ### Zoxide
-if [[ -x "$(which zoxide)"  ]]; then
-	eval "$(zoxide init zsh)"
+if command -v zoxide &>/dev/null; then
+  _cached_eval zoxide "zoxide init zsh"
 fi
 
-if [[ -x "$(which mise)" ]]; then
-  eval "$(mise activate zsh)"
+if command -v mise &>/dev/null; then
+  _cached_eval mise "mise activate zsh"
 fi
 
 ## Functions
@@ -129,17 +141,19 @@ print-path() {
 #bindkey -v
 
 ## Prompt
-eval "$(starship init zsh)"
+_cached_eval starship "starship init zsh"
 
 # broot the file browser
 [ -f ~/.config/broot/launcher/bash/br ] && source ~/.config/broot/launcher/bash/br
 
 ## Completions
 ### Brew
-if type brew &>/dev/null; then
-	FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+if command -v brew &>/dev/null; then
+	_brew_prefix=${HOMEBREW_PREFIX:-$(brew --prefix)}
+	FPATH=$_brew_prefix/share/zsh/site-functions:$FPATH
+	unset _brew_prefix
 fi
-if type nix &>/dev/null; then
+if command -v nix &>/dev/null; then
 	fpath=(~/.nix-profile/share/zsh/vendor-completions ~/.nix-profile/share/zsh/site-functions $fpath)
 	# HACK: avoid re-sourcing nix profile (overwrites PATH precedence in nested nix envs)
 	if [ -n "${__ETC_PROFILE_NIX_SOURCED:-}" ] ; then export __ETC_PROFILE_NIX_SOURCED ; fi
@@ -168,7 +182,11 @@ _generate-completions "flamegraph" "flamegraph --completions zsh"
 fpath=($COMPLETIONS_PATH $fpath)
 export FPATH
 autoload -Uz compinit
-compinit
+if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
 
 ## Functions
 
@@ -243,9 +261,9 @@ docker-pruneall() {
 
 
 ## Atuin, alternative shell history, synced across machines.
-eval "$(atuin init zsh --disable-up-arrow)"
+_cached_eval atuin "atuin init zsh --disable-up-arrow"
 
-eval "$(direnv hook zsh)"
+_cached_eval direnv "direnv hook zsh"
 
 # Syntax highlighting with fast-syntax-highlighting!
 FSH_DIR=$HOME/.fsh
