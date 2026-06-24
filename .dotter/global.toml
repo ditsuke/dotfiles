@@ -14,6 +14,7 @@ depends = []
 "bash/profile" = "~/.bash_profile"
 "zsh/zshrc" = "~/.zshrc"
 "zsh/zshenv" = "~/.zshenv"
+"scripts" = { target = "~/.config/scripts", type = "template" }
 "nvim-config" = "~/.config/nvim"
 "tmux.conf" = "~/.tmux.conf"
 "gitui" = "~/.config/gitui"
@@ -53,6 +54,14 @@ git_email = "ditsuke@protonmail.com"
 gpg_format = "gpg" # ssh
 gpg_binary = "~/.nix-profile/bin/gpg" # or ssh agent if format=ssh
 gpg_key_id = "8fd2153f4889541a54f1e09e71b6c31c8a5a9d21" # would ssh key name
+ssh_key = "~/.ssh/id_ed25519"
+# Optional: define these in local.toml to enable personal identity fallback in git-as-me
+# personal_git_name = ""
+# personal_git_email = ""
+# personal_gpg_format = "ssh"
+# personal_gpg_binary = ""
+# personal_gpg_key_id = ""
+# personal_ssh_key = "~/.ssh/id_personal"
 
 [fedora-gnome]
 depends = []

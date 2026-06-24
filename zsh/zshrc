@@ -271,6 +271,9 @@ docker-pruneall() {
 }
 
 
+# Scripts deployed from dotfiles/scripts/ via dotter
+export PATH="$HOME/.config/scripts:$PATH"
+
 # Syntax highlighting with fast-syntax-highlighting!
 FSH_DIR=$HOME/.fsh
 [[ -d $FSH_DIR ]] || { echo "Cloning fsh" ; git clone https://github.com/zdharma-continuum/fast-syntax-highlighting $FSH_DIR }

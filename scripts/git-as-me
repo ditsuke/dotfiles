@@ -1,0 +1,22 @@
+#!/usr/bin/env zsh
+if ! git rev-parse --git-dir &>/dev/null; then
+  echo "Not in a git repository" >&2
+  exit 1
+fi
+{{#if personal_git_name}}
+git config user.name "{{personal_git_name}}"
+git config user.email "{{personal_git_email}}"
+git config user.signingkey "{{personal_gpg_key_id}}"
+git config gpg.format "{{personal_gpg_format}}"
+git config gpg.{{personal_gpg_format}}.program "{{personal_gpg_binary}}"
+git config core.sshCommand "ssh -i {{personal_ssh_key}}"
+{{else}}
+git config user.name "{{git_name}}"
+git config user.email "{{git_email}}"
+git config user.signingkey "{{gpg_key_id}}"
+git config gpg.format "{{gpg_format}}"
+git config gpg.{{gpg_format}}.program "{{gpg_binary}}"
+git config core.sshCommand "ssh -i {{ssh_key}}"
+{{/if}}
+git config commit.gpgsign true
+echo "Git identity set for $(git rev-parse --show-toplevel)"
