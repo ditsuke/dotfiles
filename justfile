@@ -2,10 +2,10 @@ export NIXPKGS_ALLOW_UNFREE := "1"
 CACHIX_CACHE := "d2kdot"
 
 update-flake:
-  nix flake lock --update-input nixpkgs
+  nix flake update nixpkgs
 
 update-neovim-nightly:
-  nix flake lock --update-input neovim-nightly-overlay
+  nix flake update neovim-nightly-overlay
 
 build-flake:
   nix build .#d2common --impure
