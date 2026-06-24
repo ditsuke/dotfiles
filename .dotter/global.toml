@@ -29,6 +29,8 @@ depends = []
 "nix" = "~/.config/nix"
 "atuin" = "~/.config/atuin"
 "zellij" = "~/.config/zellij"
+"pi/settings.json" = "~/.pi/agent/settings.json"
+"pi/models.json" = "~/.pi/agent/models.json"
 "zed/keymap.json" = "~/.config/zed/keymap.json"
 "zed/settings.json" = "~/.config/zed/settings.json"
 "topgrade.toml" = "~/.config/topgrade.toml"
@@ -48,8 +50,9 @@ depends = []
 [default.variables]
 git_name = "ditsuke"
 git_email = "ditsuke@protonmail.com"
-gpg_key_id = "8fd2153f4889541a54f1e09e71b6c31c8a5a9d21"
-gpg_binary = "~/.nix-profile/bin/gpg"
+gpg_format = "gpg" # ssh
+gpg_binary = "~/.nix-profile/bin/gpg" # or ssh agent if format=ssh
+gpg_key_id = "8fd2153f4889541a54f1e09e71b6c31c8a5a9d21" # would ssh key name
 
 [fedora-gnome]
 depends = []

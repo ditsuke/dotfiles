@@ -16,7 +16,11 @@
 [credential]
 	credentialStore = gpg
 [gpg]
+	format = {{ gpg_format }}
+
+[gpg "{{gpg_format}}"]
 	program = {{ gpg_binary }}
+
 [commit]
 	gpgsign = true
 [merge]
@@ -27,8 +31,10 @@
 	external = difft
 [init]
 	defaultBranch = main
+
 [credential "https://github.com"]
 	helper = !/{{#if dotter.macos}}Users{{else}}home{{/if}}/{{username}}/.nix-profile/bin/gh auth git-credential
+
 [credential "https://gist.github.com"]
 	helper = !/{{#if dotter.macos}}Users{{else}}home{{/if}}/{{username}}/.nix-profile/bin/gh auth git-credential
 
