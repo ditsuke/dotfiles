@@ -76,6 +76,12 @@ then
 	PATH="$PATH:$BUN_BIN"
 fi
 
+if command -v uv &> /dev/null
+then
+	UV_TOOLS="$(uv tool dir)"
+	PATH="$UV_TOOLS:$PATH"
+fi
+
 ## Local env
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
 then
