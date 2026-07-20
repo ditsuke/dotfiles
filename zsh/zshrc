@@ -183,10 +183,10 @@ fi
 function _generate-completions() {
 	local cmd=$1
 	local comp_cmd=$2
+	local bin=$(whence -p "$cmd")
 
-	if command -v "$cmd" >/dev/null 2>&1; then
+	if [[ -n "$bin" ]]; then
 		local comp_script="$COMPLETIONS_PATH/_$cmd"
-		local bin=$(command -v "$cmd")
 		if [[ ! -f "$comp_script" || $bin -nt $comp_script ]]; then
 			mkdir -p $COMPLETIONS_PATH
 			eval $comp_cmd > "$comp_script"
