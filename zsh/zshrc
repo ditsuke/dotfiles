@@ -65,6 +65,20 @@ plugins=(
 	# taskwarrior
 )
 
+# Completions fpath — must come before oh-my-zsh sources compinit
+COMPLETIONS_PATH=~/.cache/zsh/completions
+if command -v brew &>/dev/null; then
+	_brew_prefix=${HOMEBREW_PREFIX:-$(brew --prefix)}
+	FPATH=$_brew_prefix/share/zsh/site-functions:$FPATH
+	unset _brew_prefix
+fi
+if command -v nix &>/dev/null; then
+	fpath=(~/.nix-profile/share/zsh/vendor-completions ~/.nix-profile/share/zsh/site-functions $fpath)
+	if [ -n "${__ETC_PROFILE_NIX_SOURCED:-}" ] ; then export __ETC_PROFILE_NIX_SOURCED ; fi
+fi
+fpath=($COMPLETIONS_PATH $fpath)
+export FPATH
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -161,21 +175,9 @@ fi
 [ -f ~/.config/broot/launcher/bash/br ] && source ~/.config/broot/launcher/bash/br
 
 ## Completions
-### Brew
-if command -v brew &>/dev/null; then
-	_brew_prefix=${HOMEBREW_PREFIX:-$(brew --prefix)}
-	FPATH=$_brew_prefix/share/zsh/site-functions:$FPATH
-	unset _brew_prefix
-fi
-if command -v nix &>/dev/null; then
-	fpath=(~/.nix-profile/share/zsh/vendor-completions ~/.nix-profile/share/zsh/site-functions $fpath)
-	# HACK: avoid re-sourcing nix profile (overwrites PATH precedence in nested nix envs)
-	if [ -n "${__ETC_PROFILE_NIX_SOURCED:-}" ] ; then export __ETC_PROFILE_NIX_SOURCED ; fi
-fi
 ### pipx
 # eval "$(register-python-argcomplete pipx)"
 
-COMPLETIONS_PATH=~/.cache/zsh/completions
 # Generate completions for commands that support it
 # Usage: _generate-completions <command> <completion_command>
 function _generate-completions() {
@@ -196,14 +198,6 @@ _generate-completions "just" "just --completions zsh"
 _generate-completions "flamegraph" "flamegraph --completions zsh"
 _generate-completions "pnpm" "pnpm completion zsh"
 _generate-completions "but" "but completions zsh"
-fpath=($COMPLETIONS_PATH $fpath)
-export FPATH
-autoload -Uz compinit
-if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
-  compinit
-else
-  compinit -C
-fi
 
 ## Functions
 
