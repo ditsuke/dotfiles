@@ -3,7 +3,7 @@
 _cached_eval_ttl() {
   local key=$1 ttl=$2 init_cmd=$3
   local cache="$HOME/.cache/zsh/ttl_${key}.zsh"
-  if [[ ! -f $cache || $(( $(date +%s) - $(stat -f %m $cache 2>/dev/null || echo 0) )) -gt $ttl ]]; then
+  if [[ ! -f $cache || $(( $(/bin/date +%s) - $(stat -f %m $cache 2>/dev/null || echo 0) )) -gt $ttl ]]; then
     mkdir -p "${cache:h}"
     eval $init_cmd >| "$cache"
   fi
@@ -23,7 +23,13 @@ export EDITOR="$(which nvim) +NoSession"
 export PAGER=less
 
 ## Build
-export CC=gcc
+if [[ "$(uname)" == "Darwin" ]]; then
+  export CC=${CC:-/usr/bin/cc}
+  export CXX=${CXX:-/usr/bin/c++}
+else
+  export CC=${CC:-gcc}
+  export CXX=${CXX:-g++}
+fi
 
 ## PATH
 
@@ -31,6 +37,7 @@ export CC=gcc
 PATH="$PATH:$HOME/.nix-profile/bin:$HOME/.nix-profile/sbin"
 
 ### Homebrew
+HOMEBREW_NO_AUTO_UPDATE=1
 HOMEBREW_DIR_LINUX=/home/linuxbrew/.linuxbrew
 if [ -d $HOMEBREW_DIR_LINUX ] ; then
 	PATH="$PATH:${HOMEBREW_DIR}/bin:${HOMEBREW_DIR}/sbin"
@@ -42,9 +49,9 @@ fi
 #eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 ### Cargo (if exist)
-if [ -f $HOME/.cargo/env ]
+if [ -d $HOME/.cargo/bin ]
 then
-    . "$HOME/.cargo/env"
+    PATH="$PATH:$HOME/.cargo/bin"
 fi
 
 ### Go
