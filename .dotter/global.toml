@@ -5,6 +5,7 @@ depends = []
 
 [default.files]
 "git/config" = "~/.gitconfig"
+"git/identities" = { target = "~/.config/git/identities", type = "template" }
 "git/global-ignore" = "~/.gitignore_global"
 "vim/.vimrc" = "~/.vimrc"
 ".ideavimrc" = "~/.ideavimrc"
@@ -30,8 +31,8 @@ depends = []
 "nix" = "~/.config/nix"
 "atuin" = "~/.config/atuin"
 "zellij" = "~/.config/zellij"
-"pi/settings.json" = "~/.pi/agent/settings.json"
-"pi/models.json" = "~/.pi/agent/models.json"
+#"pi/settings.json" = "~/.pi/agent/settings.json"
+#"pi/models.json" = "~/.pi/agent/models.json"
 "zed/keymap.json" = "~/.config/zed/keymap.json"
 "zed/settings.json" = "~/.config/zed/settings.json"
 "topgrade.toml" = "~/.config/topgrade.toml"
@@ -52,17 +53,18 @@ depends = []
 [default.variables]
 git_name = "ditsuke"
 git_email = "ditsuke@protonmail.com"
-gpg_format = "gpg" # ssh
-gpg_binary = "~/.nix-profile/bin/gpg" # or ssh agent if format=ssh
-gpg_key_id = "8fd2153f4889541a54f1e09e71b6c31c8a5a9d21" # would ssh key name
+gpg_format = "openpgp"                                  # or "ssh"
+gpg_binary = "~/.nix-profile/bin/gpg"                   # OpenPGP executable
+gpg_key_id = "8fd2153f4889541a54f1e09e71b6c31c8a5a9d21" # or SSH signing key path
 ssh_key = "~/.ssh/id_ed25519"
-# Optional: define these in local.toml to enable personal identity fallback in git-as-me
-# personal_git_name = ""
-# personal_git_email = ""
-# personal_gpg_format = "ssh"
-# personal_gpg_binary = ""
-# personal_gpg_key_id = ""
-# personal_ssh_key = "~/.ssh/id_personal"
+git_default_identity = "personal"                       # "personal" or "work"
+# Override personal_* and work_* in .dotter/local.toml; see README.md.
+# The unprefixed settings above remain fallbacks for the personal profile.
+work_git_name = ""
+work_git_email = ""
+work_gpg_format = "openpgp"
+work_gpg_key_id = ""
+work_ssh_key = ""
 
 [fedora-gnome]
 depends = []

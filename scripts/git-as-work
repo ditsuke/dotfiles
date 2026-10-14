@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+exec sh "$(dirname "$0")/git-as-profile" work "$@"

@@ -1,7 +1,8 @@
-[user]
-	name = {{ git_name }}
-	email = {{ git_email }}
-	signingkey = {{ gpg_key_id }}
+[include]
+	path = ~/.config/git/identities/{{ git_default_identity }}.gitconfig
+[alias]
+	as-me = !sh "$HOME/.config/scripts/git-as-me"
+	as-work = !sh "$HOME/.config/scripts/git-as-work"
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -15,14 +16,6 @@
 	excludesfile = ~/.gitignore_global
 [credential]
 	credentialStore = gpg
-[gpg]
-	format = {{ gpg_format }}
-
-[gpg "{{gpg_format}}"]
-	program = {{ gpg_binary }}
-
-[commit]
-	gpgsign = true
 [merge]
 	conflictStyle = zdiff3
 [pager]
@@ -37,4 +30,3 @@
 
 [credential "https://gist.github.com"]
 	helper = !/{{#if dotter.macos}}Users{{else}}home{{/if}}/{{username}}/.nix-profile/bin/gh auth git-credential
-

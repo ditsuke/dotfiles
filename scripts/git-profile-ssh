@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+set -eu
+
+key=$1
+shift
+case "$key" in
+  '~/'*) key="$HOME/${key#\~/}" ;;
+esac
+exec ssh -o IdentitiesOnly=yes -i "$key" "$@"

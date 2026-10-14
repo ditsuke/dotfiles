@@ -1,0 +1,44 @@
+#!/usr/bin/env sh
+set -eu
+
+if [ "$#" -ne 1 ]; then
+  echo "Usage: git as-me | git as-work" >&2
+  exit 1
+fi
+case "$1" in
+  personal|work) profile=$1 ;;
+  *) echo "Unknown Git identity: $1" >&2; exit 1 ;;
+esac
+
+if ! git rev-parse --git-dir >/dev/null 2>&1; then
+  echo "Not in a git repository" >&2
+  exit 1
+fi
+
+# Profiles and scripts are deployed as siblings under ~/.config.
+config="$(dirname "$0")/../git/identities/$profile.gitconfig"
+if [ ! -f "$config" ]; then
+  echo "Missing $profile profile. Deploy dotfiles with dotter first." >&2
+  exit 1
+fi
+
+# Validate the entire profile before changing the repository.
+keys="user.name user.email user.signingkey gpg.format gpg.openpgp.program gpg.ssh.program core.sshCommand commit.gpgsign"
+for key in $keys; do
+  if ! value=$(git config --file "$config" --get "$key") || [ -z "$value" ]; then
+    echo "Incomplete $profile profile: $key is missing. Set ${profile}_* variables in .dotter/local.toml and rerun dotter." >&2
+    exit 1
+  fi
+done
+case "$(git config --file "$config" --get gpg.format)" in
+  openpgp|ssh) ;;
+  *) echo "Signing format must be openpgp (GPG) or ssh." >&2; exit 1 ;;
+esac
+for key in $keys; do
+  git config --local --replace-all "$key" "$(git config --file "$config" --get "$key")"
+done
+# Remove the legacy synonym, which can otherwise override gpg.openpgp.program.
+if git config --local --get-all gpg.program >/dev/null 2>&1; then
+  git config --local --unset-all gpg.program
+fi
+echo "Git identity set to $profile for $(git rev-parse --absolute-git-dir)"

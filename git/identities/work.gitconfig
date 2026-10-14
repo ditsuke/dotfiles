@@ -1,0 +1,14 @@
+[user]
+	name = "{{work_git_name}}"
+	email = "{{work_git_email}}"
+	signingkey = "{{work_gpg_key_id}}"
+[gpg]
+	format = {{#if (eq work_gpg_format "gpg")}}openpgp{{else}}{{work_gpg_format}}{{/if}}
+[gpg "openpgp"]
+	program = "{{#if work_gpg_binary}}{{work_gpg_binary}}{{else}}{{gpg_binary}}{{/if}}"
+[gpg "ssh"]
+	program = "{{#if work_ssh_signing_binary}}{{work_ssh_signing_binary}}{{else}}ssh-keygen{{/if}}"
+[core]
+	sshCommand = "{{#if work_ssh_key}}sh \"$HOME/.config/scripts/git-profile-ssh\" '{{work_ssh_key}}'{{/if}}"
+[commit]
+	gpgsign = true
